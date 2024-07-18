@@ -25,6 +25,7 @@ class SecurityConfig() {
             .authorizeHttpRequests { authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/register", "/css/**", "/js/**").permitAll()
+                    .requestMatchers("/", "/create_group", "/delete_group").authenticated()
                     .anyRequest().authenticated()
             }
             .formLogin { formLogin ->
