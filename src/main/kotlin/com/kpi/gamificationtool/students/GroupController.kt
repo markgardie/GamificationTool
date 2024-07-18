@@ -3,6 +3,7 @@ package com.kpi.gamificationtool.students
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 
 @Controller
@@ -10,17 +11,15 @@ class GroupController(
     private val groupService: GroupService
 ) {
     @GetMapping("/")
-    fun showGroupList(model: Model): String {
-        val groups: List<Group> = groupService.findAll()
+    fun listGroups(model: Model, principal: Principal): String {
+        val groups = groupService.findAllByUser(principal.name)
         model.addAttribute("groups", groups)
         return "index"
     }
 
     @PostMapping("/delete_group")
-    fun deleteGroup(@RequestParam groupId: Long?): String {
-        if (groupId != null) {
-            groupService.deleteGroupById(groupId)
-        }
+    fun deleteGroup(@RequestParam id: Long, principal: Principal): String {
+        groupService.deleteGroupById(id, principal.name)
         return "redirect:/"
     }
 
@@ -30,17 +29,8 @@ class GroupController(
     }
 
     @PostMapping("/create_group")
-    fun createGroup(@ModelAttribute groupForm: GroupForm, model: Model): String {
-        if (groupForm.name == "") {
-            model.addAttribute("error", "Немає назви")
-            return "students/create-group"
-        }
-        try {
-            groupService.upsertGroup(groupForm.name)
-        } catch (e: RuntimeException) {
-            model.addAttribute("error", e.message)
-            return "students/create-group"
-        }
+    fun createGroup(@RequestParam name: String, principal: Principal): String {
+        groupService.upsertGroup(name, principal.name)
         return "redirect:/"
     }
 }
