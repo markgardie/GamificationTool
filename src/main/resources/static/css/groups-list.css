@@ -63,3 +63,23 @@ h1 {
     color: #666;
     font-style: italic;
 }
+
+.logout-form {
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}

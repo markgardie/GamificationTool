@@ -10,6 +10,11 @@
 <div class="container">
     <h1>Список груп учнів</h1>
 
+    <!-- Кнопку виходу -->
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Вийти</button>
+    </form>
+
     <!-- Перевірка наявності груп -->
     <th:block th:if="${not #lists.isEmpty(groups)}">
         <ul class="group-list">
