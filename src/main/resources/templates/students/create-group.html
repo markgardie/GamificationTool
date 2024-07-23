@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Створення нової групи</title>
-    <link rel="stylesheet" th:href="@{/css/create-group.css}">
+    <link rel="stylesheet" th:href="@{/css/students.css}">
 </head>
 <body>
 <div class="container">
@@ -12,9 +12,9 @@
     <form th:action="@{/create_group}"  method="post">
         <label for="name">Назва групи:</label>
         <input type="text" id="name" name="name" required>
-        <button type="submit">Створити групу</button>
+        <button class = "btn btn-primary" type="submit">Створити групу</button>
     </form>
-    <a th:href="@{/}" class="back-link">Повернутися до списку груп</a>
+    <a th:href="@{/}" class="btn btn-secondary">Повернутися до списку груп</a>
 </div>
 </body>
 </html>

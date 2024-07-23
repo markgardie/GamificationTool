@@ -1,0 +1,136 @@
+/* Загальні стилі */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+/* Форми та кнопки */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #e4e4e4;
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #ff3333;
+}
+
+/* Списки */
+.list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-item {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 10px;
+}
+
+.item-link:hover {
+    background-color: #f0f0f0;
+}
+
+/* Спеціальні стилі */
+.logout-form {
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.empty-list {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Адаптивний дизайн */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

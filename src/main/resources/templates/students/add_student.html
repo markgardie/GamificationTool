@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Додати нового студента</title>
-    <link th:href="@{/css/add-student.css}" rel="stylesheet">
+    <link th:href="@{/css/students.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -20,11 +20,11 @@
             <input type="number" id="age" name="age" required min="1" max="100">
         </div>
         <input type="hidden" name="groupName" th:value="${param.groupName}">
-        <button type="submit" class="submit-btn">Додати студента</button>
+        <button type="submit" class="btn btn-primary">Додати студента</button>
     </form>
 
     <!-- Кнопка повернення до списку студентів -->
-    <a th:href="@{/students/(groupName=${param.groupName})}" class="back-btn">Повернутися до списку студентів</a>
+    <a th:href="@{/students/(groupName=${param.groupName})}" class="btn btn-secondary">Повернутися до списку студентів</a>
 </div>
 </body>
 </html>
