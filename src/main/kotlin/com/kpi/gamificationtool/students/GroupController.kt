@@ -18,8 +18,8 @@ class GroupController(
     }
 
     @PostMapping("/delete_group")
-    fun deleteGroup(@RequestParam id: Long, principal: Principal): String {
-        groupService.deleteGroupById(id, principal.name)
+    fun deleteGroup(@RequestParam groupId: Long, principal: Principal): String {
+        groupService.deleteGroupById(groupId, principal.name)
         return "redirect:/"
     }
 
@@ -29,8 +29,8 @@ class GroupController(
     }
 
     @PostMapping("/create_group")
-    fun createGroup(@RequestParam name: String, principal: Principal): String {
-        groupService.upsertGroup(name, principal.name)
+    fun createGroup(@ModelAttribute groupForm: GroupForm, principal: Principal): String {
+        groupService.upsertGroup(groupForm.name, principal.name)
         return "redirect:/"
     }
 }

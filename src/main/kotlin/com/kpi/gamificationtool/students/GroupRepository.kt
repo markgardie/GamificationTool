@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface GroupRepository: JpaRepository<Group, Long> {
 
     fun findByUser(user: User): List<Group>
+
     fun findByNameAndUser(name: String, user: User): Group?
+
+    fun findByName(name: String): Group?
 }

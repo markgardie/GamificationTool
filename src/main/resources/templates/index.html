@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список груп учнів</title>
-    <link th:href = "@{css/groups-list.css}" rel="stylesheet">
+    <link th:href="@{css/groups-list.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <h1>Список груп учнів</h1>
 
-    <!-- Кнопку виходу -->
+    <!-- Кнопка виходу -->
     <form th:action="@{/logout}" method="post" class="logout-form">
         <button type="submit" class="logout-btn">Вийти</button>
     </form>
@@ -20,7 +20,9 @@
         <ul class="group-list">
             <!-- Цикл для виводу кожної групи -->
             <li th:each="group : ${groups}" class="group-item">
-                <span class="group-name" th:text="${group.name}">Назва групи</span>
+                <a th:href="@{/students(groupName=${group.name})}" class="group-link">
+                    <span class="group-name" th:text="${group.name}">Назва групи</span>
+                </a>
                 <form th:action="@{/delete_group}" method="post" style="display: inline;">
                     <input type="hidden" name="groupId" th:value="${group.id}" />
                     <button type="submit" class="delete-btn">&#10005;</button>

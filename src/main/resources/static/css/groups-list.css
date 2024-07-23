@@ -83,3 +83,14 @@ h1 {
 .logout-btn:hover {
     background-color: #d32f2f;
 }
+
+.group-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 10px;
+}
+
+.group-link:hover {
+    background-color: #f0f0f0;
+}

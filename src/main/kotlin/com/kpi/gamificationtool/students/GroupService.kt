@@ -17,7 +17,13 @@ class GroupService(
     fun upsertGroup(name: String, username: String): Group {
         val user = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("Користувача не знайдено")
         val existingGroup = groupRepository.findByNameAndUser(name, user)
-        return existingGroup ?: groupRepository.save(Group(name = name, user = user))
+        return existingGroup ?: groupRepository.save(
+            Group(
+                name = name,
+                user = user,
+                students = emptyList()
+            )
+        )
     }
 
     fun deleteGroupById(id: Long, username: String) {

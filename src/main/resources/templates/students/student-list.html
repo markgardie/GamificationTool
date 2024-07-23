@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список студентів</title>
+    <link th:href="@{/css/student-list.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Список студентів групи <span th:text="${groupName}"></span></h1>
+
+    <!-- Кнопка повернення до списку груп -->
+    <a th:href="@{/}" class="back-btn">Повернутися до списку груп</a>
+
+    <!-- Перевірка наявності студентів -->
+    <th:block th:if="${not #lists.isEmpty(students)}">
+        <ul class="student-list">
+            <!-- Цикл для виводу кожного студента -->
+            <li th:each="student : ${students}" class="student-item">
+                <span class="student-name" th:text="${student.name}">Ім'я студента</span>
+                <span class="student-age" th:text="${student.age + ' років'}">Вік</span>
+                <form th:action="@{/students/delete}" method="post" style="display: inline;">
+                    <input type="hidden" name="studentId" th:value="${student.id}" />
+                    <input type="hidden" name="groupName" th:value="${groupName}" />
+                    <button type="submit" class="delete-btn">&#10005;</button>
+                </form>
+            </li>
+        </ul>
+    </th:block>
+
+    <!-- Повідомлення, якщо список студентів порожній -->
+    <p th:if="${#lists.isEmpty(students)}" class="empty-list">У цій групі немає студентів</p>
+
+    <!-- Кнопка для додавання нового студента -->
+    <a th:href="@{/students/add(groupName=${groupName})}" class="add-btn">Додати нового студента</a>
+</div>
+</body>
+</html>
