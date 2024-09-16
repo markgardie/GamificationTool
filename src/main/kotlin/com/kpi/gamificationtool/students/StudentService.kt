@@ -16,6 +16,10 @@ class StudentService(
         return studentRepository.findByGroup(group)
     }
 
+    fun findById(id: Long): Student {
+        return studentRepository.findById(id).orElse(null)
+    }
+
     fun saveStudent(studentName: String, age: Int, groupName: String): Student {
         val group = groupRepository.findByName(groupName)
             ?: throw UsernameNotFoundException("Групу не знайдено")
@@ -23,7 +27,8 @@ class StudentService(
         val student = Student(
             name = studentName,
             age = age,
-            group = group
+            group = group,
+            points = emptyList(),
         )
         return studentRepository.save(student)
     }

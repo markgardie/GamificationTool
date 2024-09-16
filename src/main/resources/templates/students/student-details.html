@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі студента</title>
+    <link th:href="@{/css/students.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Деталі студента</h1>
+    <div class="student-details">
+        <h2 th:text="${student.name}">Ім'я студента</h2>
+        <p><strong>Група:</strong> <span th:text="${student.group.name}">Назва групи</span></p>
+        <p><strong>Вік:</strong> <span th:text="${student.age}">Вік</span> років</p>
+
+        <h3>Бали</h3>
+        <div th:if="${not #lists.isEmpty(student.points)}" class="points-list">
+            <div th:each="point : ${student.points}" class="point-item">
+                <span class="point-name" th:text="${point.name}">Назва шкали</span>
+                <span class="point-value" th:text="${point.value}">Кількість балів</span>
+            </div>
+        </div>
+        <p th:if="${#lists.isEmpty(student.points)}" class="empty-list">У цього студента немає балів</p>
+
+        <div class="actions">
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">Редагувати</a>
+            <a th:href="@{/students(groupName=${student.group.name})}" class="btn btn-secondary">Повернутися до списку студентів</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

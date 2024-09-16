@@ -16,8 +16,12 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-h1 {
+h1, h2, h3 {
     color: #333;
+    margin-bottom: 20px;
+}
+
+h1 {
     text-align: center;
 }
 
@@ -50,6 +54,7 @@ input[type="number"] {
     text-decoration: none;
     text-align: center;
     transition: background-color 0.3s;
+    margin-right: 10px;
 }
 
 .btn-primary {
@@ -88,15 +93,32 @@ input[type="number"] {
 .list-item {
     background-color: #f9f9f9;
     margin-bottom: 10px;
-    padding: 10px;
     border-radius: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.student-link {
+    flex-grow: 1;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.student-link:hover {
+    background-color: #f0f0f0;
+}
+
 .item-name {
     font-weight: bold;
+}
+
+.student-age {
+    color: #666;
 }
 
 .item-link {
@@ -122,6 +144,81 @@ input[type="number"] {
     font-style: italic;
 }
 
+/* Стилі для сторінки деталей студента */
+.student-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.student-details h2 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.student-details p {
+    margin-bottom: 10px;
+}
+
+.points-list {
+    margin-top: 15px;
+}
+
+.point-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.point-name {
+    font-weight: bold;
+}
+
+.point-value {
+    color: #4CAF50;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.list-item {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-link {
+    flex-grow: 1;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.student-link:hover {
+    background-color: #f0f0f0;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.student-age {
+    color: #666;
+}
+
 /* Адаптивний дизайн */
 @media (max-width: 600px) {
     .container {
@@ -131,6 +228,15 @@ input[type="number"] {
 
     .btn {
         width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .actions {
+        text-align: center;
+    }
+
+    .actions .btn {
+        display: block;
         margin-bottom: 10px;
     }
 }

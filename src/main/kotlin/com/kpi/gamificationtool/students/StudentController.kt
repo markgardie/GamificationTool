@@ -24,6 +24,14 @@ class StudentController(
         return "students/add_student"
     }
 
+    @GetMapping("/details/{id}")
+    fun showStudentDetails(@PathVariable id: Long, model: Model): String {
+        val student = studentService.findById(id)
+        model.addAttribute("student", student)
+        return "students/student-details"
+
+    }
+
     @PostMapping("/add")
     fun addStudent(@ModelAttribute studentForm: StudentForm, @RequestParam groupName: String): String {
         studentService.saveStudent(studentForm.name, studentForm.age, groupName)

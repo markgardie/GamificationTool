@@ -1,11 +1,12 @@
 package com.kpi.gamificationtool.students
 
+import com.kpi.gamificationtool.points_system.Point
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "students")
 data class Student(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
     @Column(nullable = false)
@@ -16,4 +17,7 @@ data class Student(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     val group: Group,
+
+    @OneToMany(mappedBy = "student", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val points: List<Point>,
 )
