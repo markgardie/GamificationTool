@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати нового студента</title>
+    <link th:href="@{/css/students.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Додати нового студента</h1>
+
+    <form th:action="@{/students/add}" method="post">
+        <div class="form-group">
+            <label for="name">Ім'я студента:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Вік:</label>
+            <input type="number" id="age" name="age" required min="1" max="100">
+        </div>
+        <input type="hidden" name="groupName" th:value="${param.groupName}">
+        <button type="submit" class="btn btn-primary">Додати студента</button>
+    </form>
+
+    <!-- Кнопка повернення до списку студентів -->
+    <a th:href="@{/students/(groupName=${param.groupName})}" class="btn btn-secondary">Повернутися до списку студентів</a>
+</div>
+</body>
+</html>

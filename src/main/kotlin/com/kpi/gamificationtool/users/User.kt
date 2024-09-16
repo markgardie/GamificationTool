@@ -1,11 +1,11 @@
 package com.kpi.gamificationtool.users
 
+import com.kpi.gamificationtool.students.Group
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "users")
 data class User(
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -17,4 +17,7 @@ data class User(
 
     @Column(nullable = false)
     val password: String,
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val groups: MutableList<Group> = mutableListOf()
 )

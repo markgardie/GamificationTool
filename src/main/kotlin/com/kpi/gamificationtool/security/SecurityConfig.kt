@@ -1,10 +1,7 @@
 package com.kpi.gamificationtool.security
 
-import com.kpi.gamificationtool.users.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -25,6 +22,7 @@ class SecurityConfig() {
             .authorizeHttpRequests { authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/register", "/css/**", "/js/**").permitAll()
+                    .requestMatchers("/", "/create_group", "/delete_group").authenticated()
                     .anyRequest().authenticated()
             }
             .formLogin { formLogin ->
