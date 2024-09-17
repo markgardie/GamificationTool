@@ -15,13 +15,13 @@
         <p><strong>Вік:</strong> <span th:text="${student.age}">Вік</span> років</p>
 
         <h3>Бали</h3>
-        <div th:if="${not #lists.isEmpty(student.points)}" class="points-list">
-            <div th:each="point : ${student.points}" class="point-item">
+        <div th:if="${not #lists.isEmpty(student.pointSystems)}" class="points-list">
+            <div th:each="point : ${student.pointSystems}" class="point-item">
                 <span class="point-name" th:text="${point.name}">Назва шкали</span>
                 <span class="point-value" th:text="${point.value}">Кількість балів</span>
             </div>
         </div>
-        <p th:if="${#lists.isEmpty(student.points)}" class="empty-list">У цього студента немає балів</p>
+        <p th:if="${#lists.isEmpty(student.pointSystems)}" class="empty-list">У цього студента немає балів</p>
 
         <div class="actions">
             <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">Редагувати</a>

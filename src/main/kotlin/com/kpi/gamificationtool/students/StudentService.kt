@@ -28,7 +28,7 @@ class StudentService(
             name = studentName,
             age = age,
             group = group,
-            points = emptyList(),
+            pointSystems = emptyList(),
         )
         return studentRepository.save(student)
     }

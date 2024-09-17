@@ -1,6 +1,6 @@
 package com.kpi.gamificationtool.students
 
-import com.kpi.gamificationtool.points_system.Point
+import com.kpi.gamificationtool.points_system.PointSystem
 import jakarta.persistence.*
 
 @Entity
@@ -19,5 +19,5 @@ data class Student(
     val group: Group,
 
     @OneToMany(mappedBy = "student", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val points: List<Point>,
+    val pointSystems: List<PointSystem>,
 )
