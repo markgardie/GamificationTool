@@ -219,6 +219,44 @@ input[type="number"] {
     color: #666;
 }
 
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.point-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.point-item form {
+    margin-left: 5px;
+}
+
+.point-item button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
 /* Адаптивний дизайн */
 @media (max-width: 600px) {
     .container {

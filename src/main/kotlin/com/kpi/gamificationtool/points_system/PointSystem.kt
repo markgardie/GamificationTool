@@ -11,7 +11,7 @@ data class PointSystem(
 
     val name: String,
 
-    val value: Int,
+    var value: Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)

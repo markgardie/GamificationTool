@@ -1,5 +1,6 @@
 package com.kpi.gamificationtool.students
 
+import com.kpi.gamificationtool.points_system.PointSystemService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -7,7 +8,8 @@ import org.springframework.web.bind.annotation.*
 @Controller
 @RequestMapping(path = ["/students"])
 class StudentController(
-    private val studentService: StudentService
+    private val studentService: StudentService,
+    private val pointSystemService: PointSystemService,
 ) {
 
     @GetMapping
@@ -42,5 +44,17 @@ class StudentController(
     fun deleteStudent(@RequestParam studentId: Long, @RequestParam groupName: String): String {
         studentService.deleteStudentById(studentId)
         return "redirect:/students?groupName=$groupName"
+    }
+
+    @PostMapping("/{id}/points/increase")
+    fun increasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
+        pointSystemService.increasePoints(id, name, amount)
+        return "redirect:/students/details/$id"
+    }
+
+    @PostMapping("/{id}/points/decrease")
+    fun decreasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
+        pointSystemService.decreasePoints(id, name, amount)
+        return "redirect:/students/details/$id"
     }
 }

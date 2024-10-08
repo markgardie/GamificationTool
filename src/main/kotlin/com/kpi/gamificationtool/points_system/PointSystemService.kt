@@ -1,6 +1,5 @@
 package com.kpi.gamificationtool.points_system
 
-import com.kpi.gamificationtool.students.Student
 import com.kpi.gamificationtool.students.StudentRepository
 import org.springframework.stereotype.Service
 
@@ -11,24 +10,29 @@ class PointSystemService(
     private val studentRepository: StudentRepository
 ) {
 
-    fun addPointSystem(name: String, value: Int, studentId: Long) {
-
-        val student = studentRepository.findById(studentId).orElseThrow()
-
-        val pointSystem = PointSystem(
-            name = name,
-            value = value,
-            student = student,
-        )
-
-        pointSystemRepository.save(pointSystem)
-    }
-
-    fun addTestPointSystems(systems: List<PointSystem>) {
+    fun addPointSystems(systems: List<PointSystem>) {
         pointSystemRepository.saveAll(systems)
     }
 
     fun deletePointSystem(systemId: Long) {
         pointSystemRepository.deleteById(systemId)
+    }
+
+    fun increasePoints(studentId: Long, pointSystemName: String, amount: Int) {
+        val pointSystem = pointSystemRepository.findByStudentIdAndName(studentId, pointSystemName)
+            ?: throw IllegalArgumentException("Point system not found")
+        pointSystem.value += amount
+        pointSystemRepository.save(pointSystem)
+    }
+
+    fun decreasePoints(studentId: Long, pointSystemName: String, amount: Int) {
+        val pointSystem = pointSystemRepository.findByStudentIdAndName(studentId, pointSystemName)
+            ?: throw IllegalArgumentException("Point system not found")
+        pointSystem.value = (pointSystem.value - amount).coerceAtLeast(0)
+        pointSystemRepository.save(pointSystem)
+    }
+
+    fun getPointSystems(studentId: Long): List<PointSystem> {
+        return pointSystemRepository.findByStudentId(studentId)
     }
 }

@@ -43,7 +43,7 @@ class StudentService(
 
         val res = studentRepository.save(student)
 
-        pointSystemService.addTestPointSystems(testPointSystems)
+        pointSystemService.addPointSystems(testPointSystems)
         return res
     }
 
