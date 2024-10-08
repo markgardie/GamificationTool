@@ -21,12 +21,6 @@ class StudentController(
         return "students/student-list"
     }
 
-    @GetMapping("/add")
-    fun showAddStudentForm(@RequestParam groupName: String, model: Model): String {
-        model.addAttribute("groupName", groupName)
-        return "students/add_student"
-    }
-
     @GetMapping("/details/{id}")
     fun showStudentDetails(@PathVariable id: Long, model: Model): String {
         val student = studentService.findById(id)
@@ -35,10 +29,17 @@ class StudentController(
 
     }
 
+    @GetMapping("/add")
+    fun showAddStudentForm(@RequestParam groupName: String, model: Model): String {
+        val group = groupService.findByName(groupName)
+        model.addAttribute("group", group)
+        return "students/add-student"
+    }
+
     @PostMapping("/add")
-    fun addStudent(@ModelAttribute studentForm: CreateStudentForm, @RequestParam groupName: String): String {
-        studentService.saveStudent(studentForm.name, studentForm.age, groupName)
-        return "redirect:/students?groupName=$groupName"
+    fun addStudent(@ModelAttribute studentForm: StudentForm): String {
+        val newStudent = studentService.saveStudent(studentForm)
+        return "redirect:/students?groupName=${newStudent.group.name}"
     }
 
     @PostMapping("/delete")
@@ -69,8 +70,9 @@ class StudentController(
     }
 
     @PostMapping("/edit/{id}")
-    fun updateStudent(@PathVariable id: Long, @ModelAttribute editStudentForm: EditStudentForm): String {
-        studentService.updateStudent(id, editStudentForm.name, editStudentForm.age, editStudentForm.groupId)
+    fun updateStudent(@PathVariable id: Long, @ModelAttribute studentForm: StudentForm): String {
+        studentService.updateStudent(id, studentForm)
         return "redirect:/students/details/$id"
     }
+
 }

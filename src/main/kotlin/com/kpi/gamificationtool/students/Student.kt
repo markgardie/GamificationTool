@@ -14,6 +14,12 @@ data class Student(
 
     val age: Int,
 
+    @Column(unique = true, nullable = false)
+    val login: String,
+
+    @Column(nullable = false)
+    val password: String,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     val group: Group,
