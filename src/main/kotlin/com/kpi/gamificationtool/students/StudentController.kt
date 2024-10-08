@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*
 class StudentController(
     private val studentService: StudentService,
     private val pointSystemService: PointSystemService,
+    private val groupService: GroupService,
 ) {
 
     @GetMapping
@@ -61,13 +62,15 @@ class StudentController(
     @GetMapping("/edit/{id}")
     fun showEditForm(@PathVariable id: Long, model: Model): String {
         val student = studentService.findById(id)
+        val groups = groupService.getAllGroups()
         model.addAttribute("student", student)
+        model.addAttribute("groups", groups)
         return "students/edit-student"
     }
 
     @PostMapping("/edit/{id}")
     fun updateStudent(@PathVariable id: Long, @ModelAttribute studentForm: StudentForm): String {
-        studentService.updateStudent(id, studentForm.name, studentForm.age)
+        studentService.updateStudent(id, studentForm.name, studentForm.age, studentForm.groupId)
         return "redirect:/students/details/$id"
     }
 }

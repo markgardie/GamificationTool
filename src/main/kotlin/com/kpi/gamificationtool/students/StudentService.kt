@@ -51,10 +51,13 @@ class StudentService(
         studentRepository.deleteById(id)
     }
 
-    fun updateStudent(id: Long, name: String, age: Int): Student {
+    fun updateStudent(id: Long, name: String, age: Int, groupId: Long): Student {
         val student = studentRepository.findById(id).orElseThrow {
             IllegalArgumentException("Student not found")
         }
-        return studentRepository.save(student.copy(name = name, age = age))
+        val newGroup = groupRepository.findById(groupId).orElseThrow {
+            IllegalArgumentException("Group not found")
+        }
+        return studentRepository.save(student.copy(name = name, age = age, group = newGroup))
     }
 }

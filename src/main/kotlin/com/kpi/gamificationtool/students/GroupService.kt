@@ -34,4 +34,8 @@ class GroupService(
         }
         groupRepository.deleteById(id)
     }
+
+    fun getAllGroups(): List<Group> {
+        return groupRepository.findAll()
+    }
 }

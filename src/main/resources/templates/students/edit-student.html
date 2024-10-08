@@ -19,6 +19,16 @@
             <input type="number" id="age" name="age" th:value="${student.age}" required min="0">
         </div>
         <div class="form-group">
+            <label for="groupId">Група:</label>
+            <select id="groupId" name="groupId" required>
+                <option th:each="group : ${groups}"
+                        th:value="${group.id}"
+                        th:text="${group.name}"
+                        th:selected="${group.id == student.group.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Зберегти зміни</button>
             <a th:href="@{/students/details/{id}(id=${student.id})}" class="btn btn-secondary">Скасувати</a>
         </div>
