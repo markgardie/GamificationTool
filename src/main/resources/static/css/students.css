@@ -257,6 +257,38 @@ input[type="number"] {
     font-size: 14px;
 }
 
+.edit-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.edit-form .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.edit-form .btn {
+    margin-right: 10px;
+}
+
 /* Адаптивний дизайн */
 @media (max-width: 600px) {
     .container {
@@ -276,5 +308,9 @@ input[type="number"] {
     .actions .btn {
         display: block;
         margin-bottom: 10px;
+    }
+
+    .edit-form {
+        padding: 15px;
     }
 }

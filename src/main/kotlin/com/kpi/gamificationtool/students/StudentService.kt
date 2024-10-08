@@ -50,4 +50,11 @@ class StudentService(
     fun deleteStudentById(id: Long) {
         studentRepository.deleteById(id)
     }
+
+    fun updateStudent(id: Long, name: String, age: Int): Student {
+        val student = studentRepository.findById(id).orElseThrow {
+            IllegalArgumentException("Student not found")
+        }
+        return studentRepository.save(student.copy(name = name, age = age))
+    }
 }

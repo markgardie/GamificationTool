@@ -57,4 +57,17 @@ class StudentController(
         pointSystemService.decreasePoints(id, name, amount)
         return "redirect:/students/details/$id"
     }
+
+    @GetMapping("/edit/{id}")
+    fun showEditForm(@PathVariable id: Long, model: Model): String {
+        val student = studentService.findById(id)
+        model.addAttribute("student", student)
+        return "students/edit-student"
+    }
+
+    @PostMapping("/edit/{id}")
+    fun updateStudent(@PathVariable id: Long, @ModelAttribute studentForm: StudentForm): String {
+        studentService.updateStudent(id, studentForm.name, studentForm.age)
+        return "redirect:/students/details/$id"
+    }
 }
