@@ -36,7 +36,7 @@ class StudentController(
     }
 
     @PostMapping("/add")
-    fun addStudent(@ModelAttribute studentForm: StudentForm, @RequestParam groupName: String): String {
+    fun addStudent(@ModelAttribute studentForm: CreateStudentForm, @RequestParam groupName: String): String {
         studentService.saveStudent(studentForm.name, studentForm.age, groupName)
         return "redirect:/students?groupName=$groupName"
     }
@@ -69,8 +69,8 @@ class StudentController(
     }
 
     @PostMapping("/edit/{id}")
-    fun updateStudent(@PathVariable id: Long, @ModelAttribute studentForm: StudentForm): String {
-        studentService.updateStudent(id, studentForm.name, studentForm.age, studentForm.groupId)
+    fun updateStudent(@PathVariable id: Long, @ModelAttribute editStudentForm: EditStudentForm): String {
+        studentService.updateStudent(id, editStudentForm.name, editStudentForm.age, editStudentForm.groupId)
         return "redirect:/students/details/$id"
     }
 }
