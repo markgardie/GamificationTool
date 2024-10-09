@@ -34,4 +34,12 @@ class GroupService(
         }
         groupRepository.deleteById(id)
     }
+
+    fun getAllGroups(): List<Group> {
+        return groupRepository.findAll()
+    }
+
+    fun findByName(name: String): Group {
+        return groupRepository.findByName(name) ?: throw IllegalArgumentException("Групу не знайдено")
+    }
 }

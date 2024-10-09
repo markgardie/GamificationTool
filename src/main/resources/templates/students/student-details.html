@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі студента</title>
+    <link th:href="@{/css/students.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Деталі студента</h1>
+    <div class="student-details">
+        <h2 th:text="${student.name}">Ім'я студента</h2>
+        <p><strong>Група:</strong> <span th:text="${student.group.name}">Назва групи</span></p>
+        <p><strong>Вік:</strong> <span th:text="${student.age}">Вік</span> років</p>
+
+        <h3>Бали</h3>
+        <div th:if="${not #lists.isEmpty(student.pointSystems)}" class="points-list">
+            <div th:each="point : ${student.pointSystems}" class="point-item">
+                <span class="point-name" th:text="${point.name}">Назва шкали</span>
+                <span class="point-value" th:text="${point.value}">Кількість балів</span>
+                <form th:action="@{/students/{id}/points/increase(id=${student.id})}" method="post" style="display: inline;">
+                    <input type="hidden" name="name" th:value="${point.name}" />
+                    <input type="hidden" name="amount" value="1" />
+                    <button type="submit" class="btn btn-success">+</button>
+                </form>
+                <form th:action="@{/students/{id}/points/decrease(id=${student.id})}" method="post" style="display: inline;">
+                    <input type="hidden" name="name" th:value="${point.name}" />
+                    <input type="hidden" name="amount" value="1" />
+                    <button type="submit" class="btn btn-warning">-</button>
+                </form>
+            </div>
+        </div>
+        <p th:if="${#lists.isEmpty(student.pointSystems)}" class="empty-list">У цього студента немає балів</p>
+
+        <div class="actions">
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">Редагувати</a>
+            <a th:href="@{/students(groupName=${student.group.name})}" class="btn btn-secondary">Повернутися до списку студентів</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

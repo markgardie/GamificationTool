@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагувати студента</title>
+    <link th:href="@{/css/students.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Редагувати студента</h1>
+    <form th:action="@{/students/edit/{id}(id=${student.id})}" method="post" class="edit-form">
+        <div class="form-group">
+            <label for="name">Ім'я:</label>
+            <input type="text" id="name" name="name" th:value="${student.name}" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Вік:</label>
+            <input type="number" id="age" name="age" th:value="${student.age}" required min="0">
+        </div>
+        <div class="form-group">
+            <label for="login">Логін:</label>
+            <input type="text" id="login" name="login" th:value="${student.login}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Новий пароль (залиште порожнім, якщо не змінюєте):</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="groupId">Група:</label>
+            <select id="groupId" name="groupId" required>
+                <option th:each="group : ${groups}"
+                        th:value="${group.id}"
+                        th:text="${group.name}"
+                        th:selected="${group.id == student.group.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+            <a th:href="@{/students/details/{id}(id=${student.id})}" class="btn btn-secondary">Скасувати</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
