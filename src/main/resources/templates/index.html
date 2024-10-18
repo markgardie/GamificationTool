@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список груп учнів</title>
+    <link th:href="@{css/students.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Список груп</h1>
+
+    <!-- Кнопка виходу -->
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-danger">Вийти</button>
+    </form>
+
+    <!-- Перевірка наявності груп -->
+    <th:block th:if="${not #lists.isEmpty(groups)}">
+        <ul class="list">
+            <!-- Цикл для виводу кожної групи -->
+            <li th:each="group : ${groups}" class="list-item">
+                <a th:href="@{/students(groupName=${group.name})}" class="item-link">
+                    <span class="item-name" th:text="${group.name}">Назва групи</span>
+                </a>
+                <form th:action="@{/delete_group}" method="post" style="display: inline;">
+                    <input type="hidden" name="groupId" th:value="${group.id}" />
+                    <button type="submit" class="btn btn-danger">&#10005;</button>
+                </form>
+            </li>
+        </ul>
+    </th:block>
+
+    <!-- Повідомлення, якщо список груп порожній -->
+    <p th:if="${#lists.isEmpty(groups)}" class="empty-list">Список груп порожній</p>
+
+    <!-- Кнопка для створення нової групи -->
+    <a th:href="@{/create_group}" class="btn btn-primary">Створити нову групу</a>
+</div>
+</body>
+</html>

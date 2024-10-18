@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створення нової групи</title>
+    <link rel="stylesheet" th:href="@{/css/students.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Створення нової групи</h1>
+    <form th:action="@{/create_group}"  method="post">
+        <label for="name">Назва групи:</label>
+        <input type="text" id="name" name="name" required>
+        <button class = "btn btn-primary" type="submit">Створити групу</button>
+    </form>
+    <a th:href="@{/}" class="btn btn-secondary">Повернутися до списку груп</a>
+</div>
+</body>
+</html>
