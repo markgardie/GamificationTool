@@ -8,7 +8,7 @@
 <h1>Game Rules for Group ID: ${groupId}</h1>
 
 <!-- Форма додавання нового правила -->
-<form action="/game-rules/add?groupId=${groupId}" method="post">
+<form th:action="@{/game-rules/add(groupId=${groupId})}" method="post">
     <input type="text" name="name" placeholder="Name" required>
     <input type="text" name="stimuli" placeholder="Stimuli" required>
     <input type="text" name="task" placeholder="Task" required>
