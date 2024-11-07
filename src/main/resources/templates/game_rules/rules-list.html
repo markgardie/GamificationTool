@@ -36,5 +36,10 @@
     </li>
 </ul>
 
+<!-- Перевіряємо, чи список правил пустий -->
+<div th:if="${#lists.isEmpty(gameRules)}">
+    <p>No game rules found for this group.</p>
+</div>
+
 </body>
 </html>

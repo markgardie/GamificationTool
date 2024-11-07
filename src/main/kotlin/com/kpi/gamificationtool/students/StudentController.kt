@@ -16,8 +16,13 @@ class StudentController(
     @GetMapping
     fun showStudentList(@RequestParam groupName: String, model: Model): String {
         val students = studentService.findAllByGroup(groupName)
+        val group = groupService.findByName(groupName)
+
+
         model.addAttribute("students", students)
         model.addAttribute("groupName", groupName)
+        model.addAttribute("groupId", group.id)
+
         return "students/student-list"
     }
 
