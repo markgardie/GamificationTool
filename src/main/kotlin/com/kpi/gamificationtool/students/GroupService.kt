@@ -21,7 +21,8 @@ class GroupService(
             Group(
                 name = name,
                 user = user,
-                students = emptyList()
+                students = emptyList(),
+                gameRules = emptyList(),
             )
         )
     }
