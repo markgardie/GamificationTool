@@ -1,13 +1,15 @@
 package com.kpi.gamificationtool.students
 
 import com.kpi.gamificationtool.users.UserRepository
+import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
 class GroupService(
     private val groupRepository: GroupRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val restTemplateBuilder: RestTemplateBuilder
 ) {
     fun findAllByUser(username: String): List<Group> {
         val user = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("Користувача не знайдено")
@@ -42,5 +44,9 @@ class GroupService(
 
     fun findByName(name: String): Group {
         return groupRepository.findByName(name) ?: throw IllegalArgumentException("Групу не знайдено")
+    }
+
+    fun findById(id: Long): Group {
+        return groupRepository.findById(id).orElse(null)
     }
 }

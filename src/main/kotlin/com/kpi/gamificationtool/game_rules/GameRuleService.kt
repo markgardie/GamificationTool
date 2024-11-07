@@ -35,4 +35,8 @@ class GameRuleService(
         )
         return gameRuleRepository.save(newRule)
     }
+
+    fun findById(id: Long): GameRule {
+        return gameRuleRepository.findById(id).orElse(null)
+    }
 }
