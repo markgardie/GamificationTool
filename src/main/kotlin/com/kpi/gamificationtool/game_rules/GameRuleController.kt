@@ -16,8 +16,11 @@ class GameRuleController(
     @GetMapping
     fun getGameRules(@RequestParam groupId: Long, model: Model): String {
         val gameRules = gameRuleService.getGameRulesByGroup(groupId)
+        val group = groupService.findById(groupId)
+
         model.addAttribute("gameRules", gameRules)
         model.addAttribute("groupId", groupId)
+        model.addAttribute("groupName", group.name)
         return "game_rules/rules-list"
     }
 
@@ -28,8 +31,11 @@ class GameRuleController(
         model: Model
     ): String {
         val gameRule = gameRuleService.findById(id)
+        val group = groupService.findById(groupId)
+
         model.addAttribute("gameRule", gameRule)
         model.addAttribute("groupId", groupId)
+        model.addAttribute("groupName", group.name)
         return "game_rules/edit-rule"
     }
 

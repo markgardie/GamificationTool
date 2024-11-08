@@ -5,7 +5,7 @@
     <title>Game Rules</title>
 </head>
 <body>
-<h1>Game Rules for Group ID: ${groupId}</h1>
+<h1>Game Rules for Group: <span th:text="${groupName}"></span></h1>
 
 <!-- Форма додавання нового правила -->
 <form th:action="@{/game-rules/add(groupId=${groupId})}" method="post">
@@ -36,6 +36,10 @@
 <!-- Перевіряємо, чи список правил пустий -->
 <div th:if="${#lists.isEmpty(gameRules)}">
     <p>No game rules found for this group.</p>
+</div>
+
+<div>
+    <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">Back to Students List</a>
 </div>
 
 </body>
