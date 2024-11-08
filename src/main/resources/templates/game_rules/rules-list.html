@@ -23,14 +23,18 @@
         <span th:text="${rule.stimuli}"></span> |
         <span th:text="${rule.task}"></span> |
         <span th:text="${rule.motivator}"></span>
+        <!-- Форма видалення -->
         <form th:action="@{/game-rules/delete/{id}(id=${rule.id})}" method="post" style="display: inline;">
+            <input type="hidden" name="groupId" th:value="${groupId}">
             <button type="submit">Delete</button>
         </form>
-        <form th:action="@{/game-rules/update/{id}(id=${rule.id})?groupId=${groupId}}" method="post" style="display: inline;">
-            <input type="text" name="name" placeholder="Name" value="${rule.name}" required>
-            <input type="text" name="stimuli" placeholder="Stimuli" value="${rule.stimuli}" required>
-            <input type="text" name="task" placeholder="Task" value="${rule.task}" required>
-            <input type="text" name="motivator" placeholder="Motivator" value="${rule.motivator}" required>
+        <!-- Форма оновлення -->
+        <form th:action="@{/game-rules/update/{id}(id=${rule.id})}" method="post" style="display: inline;">
+            <input type="hidden" name="groupId" th:value="${groupId}">
+            <input type="text" name="name" th:value="${rule.name}" placeholder="Name" required>
+            <input type="text" name="stimuli" th:value="${rule.stimuli}" placeholder="Stimuli" required>
+            <input type="text" name="task" th:value="${rule.task}" placeholder="Task" required>
+            <input type="text" name="motivator" th:value="${rule.motivator}" placeholder="Motivator" required>
             <button type="submit">Update</button>
         </form>
     </li>
