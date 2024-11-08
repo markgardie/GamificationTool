@@ -21,6 +21,18 @@ class GameRuleController(
         return "game_rules/rules-list"
     }
 
+    @GetMapping("/edit/{id}")
+    fun editGameRule(
+        @PathVariable id: Long,
+        @RequestParam groupId: Long,
+        model: Model
+    ): String {
+        val gameRule = gameRuleService.findById(id)
+        model.addAttribute("gameRule", gameRule)
+        model.addAttribute("groupId", groupId)
+        return "game_rules/edit-rule"
+    }
+
     @PostMapping("/add")
     fun addGameRule(
         @RequestParam groupId: Long,

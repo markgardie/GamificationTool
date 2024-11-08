@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Game Rule</title>
+</head>
+<body>
+<h1>Edit Game Rule</h1>
+
+<form th:action="@{/game-rules/update/{id}(id=${gameRule.id})}" method="post">
+    <input type="hidden" name="groupId" th:value="${groupId}">
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${gameRule.name}" required>
+    </div>
+
+    <div>
+        <label for="stimuli">Stimuli:</label>
+        <input type="text" id="stimuli" name="stimuli" th:value="${gameRule.stimuli}" required>
+    </div>
+
+    <div>
+        <label for="task">Task:</label>
+        <input type="text" id="task" name="task" th:value="${gameRule.task}" required>
+    </div>
+
+    <div>
+        <label for="motivator">Motivator:</label>
+        <input type="text" id="motivator" name="motivator" th:value="${gameRule.motivator}" required>
+    </div>
+
+    <button type="submit">Save Changes</button>
+    <a th:href="@{/game-rules(groupId=${groupId})}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+
+</body>
+</html>
