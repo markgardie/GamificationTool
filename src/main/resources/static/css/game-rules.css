@@ -1,0 +1,249 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #e4e4e4;
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.btn-danger:hover {
+    background-color: #ff3333;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Rules list */
+.rules-list {
+    margin-bottom: 20px;
+}
+
+.rule-card {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.rule-content {
+    flex-grow: 1;
+}
+
+.rule-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.rule-details {
+    color: #666;
+}
+
+.rule-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.rule-actions form {
+    margin: 0;
+}
+
+/* Add rule section */
+.add-rule-section {
+    margin-top: 20px;
+}
+
+.add-rule-form {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: none;
+}
+
+.add-rule-form input {
+    width: calc(25% - 12px);
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Empty list message */
+.empty-list {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Додайте ці стилі в кінець існуючого файлу rules-list.css */
+
+/* Edit form styles */
+.edit-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.edit-rule-form {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.form-actions .btn {
+    padding: 12px 20px;
+    font-size: 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .edit-form-container {
+        padding: 10px;
+    }
+
+    .edit-rule-form {
+        padding: 15px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .rule-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rule-actions {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .add-rule-form input {
+        width: 100%;
+        margin-right: 0;
+    }
+}
