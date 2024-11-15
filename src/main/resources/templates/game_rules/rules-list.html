@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Game Rules</title>
+    <title>Ігрові правила</title>
     <link rel="stylesheet" th:href="@{/css/game-rules.css}">
     <script th:src="@{/js/game-rules.js}" defer></script>
 </head>
 <body>
 <div class="container">
-    <h1>Game Rules for Group: <span th:text="${groupName}"></span></h1>
+    <h1>Ігрові правила для групи: <span th:text="${groupName}"></span></h1>
 
     <div class="navigation-buttons">
-        <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">Back to Students List</a>
-        <a href="#" class="btn btn-primary">Game Rules</a>
+        <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">До списку студентів</a>
+        <a href="#" class="btn btn-primary">Ігрові правила</a>
     </div>
 
     <!-- Список наявних правил -->
@@ -32,7 +32,7 @@
                     <button type="submit" class="btn btn-danger">×</button>
                 </form>
                 <a th:href="@{/game-rules/edit/{id}(id=${rule.id}, groupId=${groupId})}" class="btn btn-warning">
-                    Update
+                    Змінити
                 </a>
             </div>
         </div>
@@ -40,18 +40,18 @@
 
     <!-- Перевіряємо, чи список правил пустий -->
     <div th:if="${#lists.isEmpty(gameRules)}" class="empty-list">
-        <p>No game rules found for this group.</p>
+        <p>Ігрові правила відсутні</p>
     </div>
 
     <!-- Форма додавання нового правила -->
     <div class="add-rule-section">
-        <button class="btn btn-success add-rule-btn">Add New Rule</button>
+        <button class="btn btn-success add-rule-btn">Додати правило</button>
         <form th:action="@{/game-rules/add(groupId=${groupId})}" method="post" class="add-rule-form">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="text" name="stimuli" placeholder="Stimuli" required>
-            <input type="text" name="task" placeholder="Task" required>
-            <input type="text" name="motivator" placeholder="Motivator" required>
-            <button type="submit" class="btn btn-primary">Save Rule</button>
+            <input type="text" name="name" placeholder="Назва" required>
+            <input type="text" name="stimuli" placeholder="Стимул" required>
+            <input type="text" name="task" placeholder="Завдання" required>
+            <input type="text" name="motivator" placeholder="Ігровий елемент" required>
+            <button type="submit" class="btn btn-primary">Зберегти</button>
         </form>
     </div>
 </div>

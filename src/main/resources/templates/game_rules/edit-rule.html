@@ -2,40 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Game Rule</title>
+    <title>Редагувати правило</title>
     <link rel="stylesheet" th:href="@{/css/game-rules.css}">
 </head>
 <body>
 <div class="container">
-    <h1>Edit Game Rule</h1>
+    <h1>Редагувати правило</h1>
 
     <div class="edit-form-container">
         <form th:action="@{/game-rules/update/{id}(id=${gameRule.id})}" method="post" class="edit-rule-form">
             <input type="hidden" name="groupId" th:value="${groupId}">
 
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Назва:</label>
                 <input type="text" id="name" name="name" th:value="${gameRule.name}" required>
             </div>
 
             <div class="form-group">
-                <label for="stimuli">Stimuli:</label>
+                <label for="stimuli">Стимул:</label>
                 <input type="text" id="stimuli" name="stimuli" th:value="${gameRule.stimuli}" required>
             </div>
 
             <div class="form-group">
-                <label for="task">Task:</label>
+                <label for="task">Завдання:</label>
                 <input type="text" id="task" name="task" th:value="${gameRule.task}" required>
             </div>
 
             <div class="form-group">
-                <label for="motivator">Motivator:</label>
+                <label for="motivator">Ігровий елемент:</label>
                 <input type="text" id="motivator" name="motivator" th:value="${gameRule.motivator}" required>
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-secondary">Відмінити</a>
             </div>
         </form>
     </div>
