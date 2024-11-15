@@ -25,7 +25,8 @@ class GameRuleController(
 
     @GetMapping("/game-elements")
     @ResponseBody
-    fun getGameElements(@RequestParam coreDrive: CoreDrive): List<String> {
+    fun getGameElements(@RequestParam coreDriveName: String): List<String> {
+        val coreDrive = CoreDrive.entries.first { it.ukName == coreDriveName }
         return gameRuleService.getAvailableGameElements(coreDrive)
             .map { it.ukName }
     }

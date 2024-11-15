@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedDrive) {
             gameElementSelect.disabled = false;
             try {
-                const response = await fetch(`/game-rules/game-elements?coreDrive=${selectedDrive}`);
+                const response = await fetch(`/game-rules/game-elements?coreDriveName=${encodeURIComponent(selectedDrive)}`);
                 const elements = await response.json();
 
                 gameElementSelect.innerHTML = '<option value="">Виберіть ігровий елемент</option>';
