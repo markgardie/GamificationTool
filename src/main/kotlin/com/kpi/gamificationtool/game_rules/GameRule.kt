@@ -12,7 +12,7 @@ data class GameRule(
     val name: String,
     val stimuli: String,
     val task: String,
-    val motivator: String,
+    val gameElement: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)

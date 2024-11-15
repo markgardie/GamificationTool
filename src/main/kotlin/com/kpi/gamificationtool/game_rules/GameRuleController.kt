@@ -49,7 +49,7 @@ class GameRuleController(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
-            motivator = gameRuleForm.motivator,
+            gameElement = gameRuleForm.motivator,
             group = groupService.findById(groupId)
         )
         gameRuleService.addGameRule(newRule)
@@ -79,7 +79,7 @@ class GameRuleController(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
-            motivator = gameRuleForm.motivator,
+            gameElement = gameRuleForm.motivator,
         )
         gameRuleService.updateGameRule(id, updatedRule)
         redirectAttributes.addAttribute("groupId", groupId)

@@ -30,7 +30,7 @@ class GameRuleService(
             name = updatedGameRule.name,
             stimuli = updatedGameRule.stimuli,
             task = updatedGameRule.task,
-            motivator = updatedGameRule.motivator,
+            gameElement = updatedGameRule.gameElement,
             group = updatedGameRule.group
         )
         return gameRuleRepository.save(newRule)
