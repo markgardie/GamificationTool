@@ -13,6 +13,9 @@ class GameRuleController(
     private val groupService: GroupService,
 ) {
 
+    @ModelAttribute("core_drives")
+    fun coreDrives(): Array<CoreDrive> = CoreDrive.entries.toTypedArray()
+
     @GetMapping
     fun getGameRules(@RequestParam groupId: Long, model: Model): String {
         val gameRules = gameRuleService.getGameRulesByGroup(groupId)
@@ -49,13 +52,15 @@ class GameRuleController(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
-            gameElement = gameRuleForm.motivator,
+            gameElement = gameRuleForm.gameElement,
+            coreDrive = gameRuleForm.coreDrive,
             group = groupService.findById(groupId)
         )
         gameRuleService.addGameRule(newRule)
         redirectAttributes.addAttribute("groupId", groupId)
         return "redirect:/game-rules"
     }
+
 
     @PostMapping("/delete/{id}")
     fun deleteGameRule(
@@ -79,7 +84,8 @@ class GameRuleController(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
-            gameElement = gameRuleForm.motivator,
+            gameElement = gameRuleForm.gameElement,
+            coreDrive = gameRuleForm.coreDrive
         )
         gameRuleService.updateGameRule(id, updatedRule)
         redirectAttributes.addAttribute("groupId", groupId)

@@ -22,7 +22,9 @@
                 <div class="rule-details">
                     <span th:text="${rule.stimuli}"></span> |
                     <span th:text="${rule.task}"></span> |
+                    <span th:text="${rule.coreDrive}"></span> |
                     <span th:text="${rule.gameElement}"></span>
+
                 </div>
             </div>
             <div class="rule-actions">
@@ -49,7 +51,14 @@
             <input type="text" name="name" placeholder="Назва" required>
             <input type="text" name="stimuli" placeholder="Стимул" required>
             <input type="text" name="task" placeholder="Завдання" required>
-            <input type="text" name="motivator" placeholder="Ігровий елемент" required>
+            <select name="coreDrive" required>
+                <option value="">Виберіть драйвер</option>
+                <option th:each="drive : ${core_drives}"
+                        th:value="${drive}"
+                        th:text="${drive.name().toLowerCase()}">
+                </option>
+            </select>
+            <input type="text" name="gameElement" placeholder="Ігровий елемент" required>
             <button type="submit" class="btn btn-primary">Зберегти</button>
         </form>
     </div>

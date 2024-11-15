@@ -29,8 +29,19 @@
             </div>
 
             <div class="form-group">
-                <label for="motivator">Ігровий елемент:</label>
-                <input type="text" id="motivator" name="motivator" th:value="${gameRule.gameElement}" required>
+                <label for="coreDrive">Core Drive:</label>
+                <select id="coreDrive" name="coreDrive" required>
+                    <option th:each="drive : ${core_drives}"
+                            th:value="${drive}"
+                            th:text="${drive.name().toLowerCase()}"
+                            th:selected="${drive == gameRule.coreDrive}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gameElement">Ігровий елемент:</label>
+                <input type="text" id="gameElement" name="gameElement" th:value="${gameRule.gameElement}" required>
             </div>
 
             <div class="form-actions">

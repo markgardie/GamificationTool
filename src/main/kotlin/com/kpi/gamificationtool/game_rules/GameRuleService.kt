@@ -31,6 +31,7 @@ class GameRuleService(
             stimuli = updatedGameRule.stimuli,
             task = updatedGameRule.task,
             gameElement = updatedGameRule.gameElement,
+            coreDrive = updatedGameRule.coreDrive,
             group = updatedGameRule.group
         )
         return gameRuleRepository.save(newRule)
