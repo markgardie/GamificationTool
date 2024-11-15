@@ -14,7 +14,7 @@
     <a th:href="@{/}" class="btn btn-secondary">Повернутися до списку груп</a>
 
     <!-- Нова кнопка для переходу на сторінку правил для цієї групи -->
-    <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-info">Ігрові правила</a>
+    <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-secondary">Ігрові правила</a>
 
     <!-- Перевірка наявності студентів -->
     <th:block th:if="${not #lists.isEmpty(students)}">
