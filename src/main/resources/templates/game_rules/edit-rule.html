@@ -33,7 +33,7 @@
                 <select id="coreDrive" name="coreDrive" required>
                     <option th:each="drive : ${core_drives}"
                             th:value="${drive}"
-                            th:text="${drive.name().toLowerCase()}"
+                            th:text="${drive.ukName}"
                             th:selected="${drive == gameRule.coreDrive}">
                     </option>
                 </select>

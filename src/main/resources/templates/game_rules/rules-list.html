@@ -22,7 +22,7 @@
                 <div class="rule-details">
                     <span th:text="${rule.stimuli}"></span> |
                     <span th:text="${rule.task}"></span> |
-                    <span th:text="${rule.coreDrive}"></span> |
+                    <span th:text="${rule.coreDrive.ukName}"></span> |
                     <span th:text="${rule.gameElement}"></span>
 
                 </div>
@@ -55,7 +55,7 @@
                 <option value="">Виберіть драйвер</option>
                 <option th:each="drive : ${core_drives}"
                         th:value="${drive}"
-                        th:text="${drive.name().toLowerCase()}">
+                        th:text="${drive.ukName}">
                 </option>
             </select>
             <input type="text" name="gameElement" placeholder="Ігровий елемент" required>
