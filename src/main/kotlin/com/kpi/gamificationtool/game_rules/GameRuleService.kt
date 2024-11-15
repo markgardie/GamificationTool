@@ -11,6 +11,14 @@ class GameRuleService(
         return gameRuleRepository.findByGroupId(groupId)
     }
 
+    fun getAvailableCoreDrives(motivationType: MotivationType): List<CoreDrive> {
+        return CoreDrive.entries.filter { it.motivationTypes.contains(motivationType) }
+    }
+
+    fun getAvailableGameElements(coreDrive: CoreDrive): Set<GameElement> {
+        return coreDrive.gameElements
+    }
+
     @Transactional
     fun addGameRule(gameRule: GameRule): GameRule {
         return gameRuleRepository.save(gameRule)
@@ -30,6 +38,7 @@ class GameRuleService(
             name = updatedGameRule.name,
             stimuli = updatedGameRule.stimuli,
             task = updatedGameRule.task,
+            motivationType = updatedGameRule.motivationType,
             gameElement = updatedGameRule.gameElement,
             coreDrive = updatedGameRule.coreDrive,
             group = updatedGameRule.group

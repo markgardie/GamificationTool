@@ -22,9 +22,9 @@
                 <div class="rule-details">
                     <span th:text="${rule.stimuli}"></span> |
                     <span th:text="${rule.task}"></span> |
+                    <span th:text="${rule.motivationType.ukName}"></span> |
                     <span th:text="${rule.coreDrive.ukName}"></span> |
-                    <span th:text="${rule.gameElement}"></span>
-
+                    <span th:text="${rule.gameElement.ukName}"></span>
                 </div>
             </div>
             <div class="rule-actions">
@@ -51,14 +51,23 @@
             <input type="text" name="name" placeholder="Назва" required>
             <input type="text" name="stimuli" placeholder="Стимул" required>
             <input type="text" name="task" placeholder="Завдання" required>
-            <select name="coreDrive" required>
-                <option value="">Виберіть драйвер</option>
-                <option th:each="drive : ${core_drives}"
-                        th:value="${drive}"
-                        th:text="${drive.ukName}">
+
+            <select name="motivationType" id="motivationType" required>
+                <option value="">Виберіть тип мотивації</option>
+                <option th:each="type : ${motivation_types}"
+                        th:value="${type}"
+                        th:text="${type.ukName}">
                 </option>
             </select>
-            <input type="text" name="gameElement" placeholder="Ігровий елемент" required>
+
+            <select name="coreDrive" id="coreDrive" required disabled>
+                <option value="">Спочатку виберіть тип мотивації</option>
+            </select>
+
+            <select name="gameElement" id="gameElement" required disabled>
+                <option value="">Спочатку виберіть драйвер</option>
+            </select>
+
             <button type="submit" class="btn btn-primary">Зберегти</button>
         </form>
     </div>

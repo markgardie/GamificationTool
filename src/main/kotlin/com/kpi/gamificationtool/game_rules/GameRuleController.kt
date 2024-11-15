@@ -13,8 +13,20 @@ class GameRuleController(
     private val groupService: GroupService,
 ) {
 
-    @ModelAttribute("core_drives")
-    fun coreDrives(): Array<CoreDrive> = CoreDrive.entries.toTypedArray()
+    @ModelAttribute("motivation_types")
+    fun motivationTypes(): Array<MotivationType> = MotivationType.entries.toTypedArray()
+
+    @GetMapping("/core-drives")
+    @ResponseBody
+    fun getCoreDrives(@RequestParam motivationType: MotivationType): List<CoreDrive> {
+        return gameRuleService.getAvailableCoreDrives(motivationType)
+    }
+
+    @GetMapping("/game-elements")
+    @ResponseBody
+    fun getGameElements(@RequestParam coreDrive: CoreDrive): Set<GameElement> {
+        return gameRuleService.getAvailableGameElements(coreDrive)
+    }
 
     @GetMapping
     fun getGameRules(@RequestParam groupId: Long, model: Model): String {
@@ -26,6 +38,8 @@ class GameRuleController(
         model.addAttribute("groupName", group.name)
         return "game_rules/rules-list"
     }
+
+
 
     @GetMapping("/edit/{id}")
     fun editGameRule(
@@ -52,6 +66,7 @@ class GameRuleController(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
+            motivationType = gameRuleForm.motivationType,
             gameElement = gameRuleForm.gameElement,
             coreDrive = gameRuleForm.coreDrive,
             group = groupService.findById(groupId)
@@ -60,7 +75,6 @@ class GameRuleController(
         redirectAttributes.addAttribute("groupId", groupId)
         return "redirect:/game-rules"
     }
-
 
     @PostMapping("/delete/{id}")
     fun deleteGameRule(

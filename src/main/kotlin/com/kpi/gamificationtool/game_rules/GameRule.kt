@@ -12,11 +12,18 @@ data class GameRule(
     val name: String,
     val stimuli: String,
     val task: String,
-    val gameElement: String,
 
-    @Enumerated(EnumType.STRING)  // Зберігаємо enum як STRING в базі даних
-    @Column(name = "core_drive", nullable = false)  // Додаємо назву колонки
+    @Enumerated(EnumType.STRING)
+    @Column(name = "game_element", nullable = false)
+    val gameElement: GameElement,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "core_drive", nullable = false)
     val coreDrive: CoreDrive,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "motivation_type", nullable = false)
+    val motivationType: MotivationType,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
