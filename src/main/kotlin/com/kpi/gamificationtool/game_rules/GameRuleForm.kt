@@ -4,7 +4,7 @@ data class GameRuleForm(
     val name: String,
     val stimuli: String,
     val task: String,
-    val motivationType: MotivationType,
-    val coreDrive: CoreDrive,
-    val gameElement: GameElement
+    val motivationType: String,
+    val coreDrive: String,
+    val gameElement: String
 )

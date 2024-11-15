@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 coreDriveSelect.innerHTML = '<option value="">Виберіть драйвер</option>';
                 drives.forEach(drive => {
-                    const option = new Option(drive.ukName, drive.name);
-                    if (window.currentRule?.coreDrive && drive.name === window.currentRule.coreDrive.name) {
+                    const option = document.createElement('option');
+                    option.value = drive;
+                    option.textContent = drive;
+                    if (window.currentRule?.coreDrive && drive === window.currentRule.coreDrive) {
                         option.selected = true;
                     }
                     coreDriveSelect.add(option);
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Якщо це форма редагування і є вибраний драйвер, оновлюємо ігрові елементи
                 if (window.currentRule?.coreDrive) {
-                    await updateGameElements(window.currentRule.coreDrive.name);
+                    await updateGameElements(window.currentRule.coreDrive);
                 }
             } catch (error) {
                 console.error('Помилка при завантаженні драйверів:', error);
@@ -57,8 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 gameElementSelect.innerHTML = '<option value="">Виберіть ігровий елемент</option>';
                 elements.forEach(element => {
-                    const option = new Option(element.ukName, element.name);
-                    if (window.currentRule?.gameElement && element.name === window.currentRule.gameElement.name) {
+                    const option = document.createElement('option');
+                    option.value = element;
+                    option.textContent = element;
+                    if (window.currentRule?.gameElement && element === window.currentRule.gameElement) {
                         option.selected = true;
                     }
                     gameElementSelect.add(option);
@@ -83,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Якщо це форма редагування, ініціалізуємо початкові значення
     if (window.currentRule) {
-        updateCoreDrives(window.currentRule.motivationType.name);
+        const initialMotivationType = motivationTypeSelect.value;
+        if (initialMotivationType) {
+            updateCoreDrives(initialMotivationType);
+        }
     }
 });

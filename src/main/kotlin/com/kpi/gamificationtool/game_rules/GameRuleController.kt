@@ -18,14 +18,16 @@ class GameRuleController(
 
     @GetMapping("/core-drives")
     @ResponseBody
-    fun getCoreDrives(@RequestParam motivationType: MotivationType): List<CoreDrive> {
+    fun getCoreDrives(@RequestParam motivationType: MotivationType): List<String> {
         return gameRuleService.getAvailableCoreDrives(motivationType)
+            .map { it.ukName }
     }
 
     @GetMapping("/game-elements")
     @ResponseBody
-    fun getGameElements(@RequestParam coreDrive: CoreDrive): Set<GameElement> {
+    fun getGameElements(@RequestParam coreDrive: CoreDrive): List<String> {
         return gameRuleService.getAvailableGameElements(coreDrive)
+            .map { it.ukName }
     }
 
     @GetMapping
@@ -38,8 +40,6 @@ class GameRuleController(
         model.addAttribute("groupName", group.name)
         return "game_rules/rules-list"
     }
-
-
 
     @GetMapping("/edit/{id}")
     fun editGameRule(
@@ -61,20 +61,12 @@ class GameRuleController(
         @RequestParam groupId: Long,
         @ModelAttribute gameRuleForm: GameRuleForm,
         redirectAttributes: RedirectAttributes
-    ): String {
-        val newRule = GameRule(
-            name = gameRuleForm.name,
-            stimuli = gameRuleForm.stimuli,
-            task = gameRuleForm.task,
-            motivationType = gameRuleForm.motivationType,
-            gameElement = gameRuleForm.gameElement,
-            coreDrive = gameRuleForm.coreDrive,
-            group = groupService.findById(groupId)
-        )
-        gameRuleService.addGameRule(newRule)
-        redirectAttributes.addAttribute("groupId", groupId)
-        return "redirect:/game-rules"
-    }
+    ): String = handleGameRule(
+        gameRuleForm = gameRuleForm,
+        groupId = groupId,
+        redirectAttributes = redirectAttributes,
+        action = { gameRuleService.addGameRule(it) }
+    )
 
     @PostMapping("/delete/{id}")
     fun deleteGameRule(
@@ -93,15 +85,48 @@ class GameRuleController(
         @RequestParam groupId: Long,
         @ModelAttribute gameRuleForm: GameRuleForm,
         redirectAttributes: RedirectAttributes
+    ): String = handleGameRule(
+        gameRuleForm = gameRuleForm,
+        groupId = groupId,
+        redirectAttributes = redirectAttributes,
+        action = { rule ->
+            val updatedRule = gameRuleService.findById(id).copy(
+                name = rule.name,
+                stimuli = rule.stimuli,
+                task = rule.task,
+                motivationType = rule.motivationType,
+                gameElement = rule.gameElement,
+                coreDrive = rule.coreDrive
+            )
+            gameRuleService.updateGameRule(id, updatedRule)
+        }
+    )
+
+    private fun GameRuleForm.toEnums() = Triple(
+        MotivationType.entries.first { it.ukName == motivationType },
+        CoreDrive.entries.first { it.ukName == coreDrive },
+        GameElement.entries.first { it.ukName == gameElement }
+    )
+
+    private fun handleGameRule(
+        gameRuleForm: GameRuleForm,
+        groupId: Long,
+        redirectAttributes: RedirectAttributes,
+        action: (GameRule) -> GameRule
     ): String {
-        val updatedRule = gameRuleService.findById(id).copy(
+        val (motivationType, coreDrive, gameElement) = gameRuleForm.toEnums()
+
+        val rule = GameRule(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
             task = gameRuleForm.task,
-            gameElement = gameRuleForm.gameElement,
-            coreDrive = gameRuleForm.coreDrive
+            motivationType = motivationType,
+            coreDrive = coreDrive,
+            gameElement = gameElement,
+            group = groupService.findById(groupId)
         )
-        gameRuleService.updateGameRule(id, updatedRule)
+
+        action(rule)
         redirectAttributes.addAttribute("groupId", groupId)
         return "redirect:/game-rules"
     }
