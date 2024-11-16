@@ -1,5 +1,6 @@
 package com.kpi.gamificationtool.students
 
+import com.kpi.gamificationtool.game_rules.GameRule
 import com.kpi.gamificationtool.users.User
 import jakarta.persistence.*
 
@@ -18,4 +19,7 @@ data class Group(
 
     @OneToMany(mappedBy = "group", cascade = [CascadeType.ALL], orphanRemoval = true)
     val students: List<Student>,
+
+    @OneToMany(mappedBy = "group", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val gameRules: List<GameRule>,
 )
