@@ -1,9 +1,68 @@
 package com.kpi.gamificationtool.game_rules
 
 enum class GameElement(val ukName: String, val description: String) {
-    POINTS("Бали", "Система накопичення балів за виконані дії"),
-    BADGES("Значки", "Відзнаки за досягнення певних цілей"),
-    LEADERBOARDS("Таблиці лідерів", "Рейтингова система учасників"),
-    LEVELS("Рівні", "Система прогресу з рівнями досягнень")
+    NARRATIVE("", ""),
+    REAL_PROJECTS("", ""),
+    CHARITY_PROJECTS("", ""),
+    MENTORSHIP("", ""),
+    CRISIS_SIMULATION("", ""),
+
+    DEVELOPER_LEVELS("", ""),
+    SKILL_TREE("", ""),
+    BADGES("", ""),
+    PERSONAL_STATISTIC("", ""),
+    QUIZ("", ""),
+    TECHNICAL_DEMO("", ""),
+    PORTFOLIO("", ""),
+    CERTIFICATE("", ""),
+    CHALLENGE("", ""),
+    PROGRESS_BAR("", ""),
+    TROPHY("", ""),
+    BURNDOWN_DIAGRAM("", ""),
+    KANBAN_BOARD("", ""),
+    LEADERBOARD("", ""),
+
+
+    OWN_PROJECTS("", ""),
+    OWN_SOLUTIONS("", ""),
+    RESEARCH("", ""),
+    CUSTOMIZATION("", ""),
+    NONLINEAR_STORY("", ""),
+    INNOVATION_HACKATHON("", ""),
+    IDEAS_FORUM("", ""),
+    BRAINSTORM("", ""),
+    SIX_HATS("", ""),
+    FOUR_STEP_SKETCH("", ""),
+    DOT_VOTING("", ""),
+    CRAZY_EIGHTS("", ""),
+
+    CURRENCY("", ""),
+    STORE("", ""),
+    COLLECTION_SET("", ""),
+    VIRTUAL_ECONOMICS("", ""),
+
+    LIMITED_COURSES("", ""),
+    DEADLINES("", ""),
+    LIMITED_RESOURCES("", ""),
+    FUNCTIONALITY_PRIORITIZATION("", ""),
+    REQUIREMENTS_PRIORITIZATION("", ""),
+    TIME_LIMITED_INTERVIEWS("", ""),
+    TIME_LIMITED_HACKATHONS("", ""),
+    SPRINT_PLANNING("", ""),
+
+    CHANGING_REQUIREMENTS("", ""),
+    RANDOM_TEAMS("", ""),
+    RANDOM_BUGS("", ""),
+    UNPREDICTABLE_STORY("", ""),
+    EASTER_EGGS("", ""),
+    STORY_POINT_ESTIMATION("", ""),
+    RANDOM_TECHNOLOGIES("", ""),
+
+    NEGATIVE_ENDING("", ""),
+    STARTUP_FAILURE("", ""),
+    CYBERATTACK("", ""),
+    PROJECTS_ATTACK_COMPETITION("", ""),
+    PENALTY_POINTS("", ""),
+    LOSING_STREAK("", ""),
 
 }

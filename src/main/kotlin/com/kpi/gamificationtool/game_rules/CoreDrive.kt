@@ -9,12 +9,7 @@ enum class CoreDrive(
     ACCOMPLISHMENT(
         ukName = "Досягнення",
         motivationTypes = setOf(MotivationType.POSITIVE, MotivationType.LOGICAL),
-        gameElements = setOf(
-            GameElement.POINTS,
-            GameElement.BADGES,
-            GameElement.LEADERBOARDS,
-            GameElement.LEVELS
-        )
+        gameElements = setOf()
     ),
     MEANING(
         ukName = "Сенс",
