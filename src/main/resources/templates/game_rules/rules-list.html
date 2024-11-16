@@ -55,7 +55,7 @@
             <select name="motivationType" id="motivationType" required>
                 <option value="">Виберіть тип мотивації</option>
                 <option th:each="type : ${motivation_types}"
-                        th:value="${type}"
+                        th:value="${type.ukName}"
                         th:text="${type.ukName}">
                 </option>
             </select>

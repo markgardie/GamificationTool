@@ -33,7 +33,7 @@
                 <label for="motivationType">Тип мотивації:</label>
                 <select id="motivationType" name="motivationType" required>
                     <option th:each="type : ${motivation_types}"
-                            th:value="${type}"
+                            th:value="${type.ukName}"
                             th:text="${type.ukName}"
                             th:selected="${type == gameRule.motivationType}">
                     </option>
@@ -65,9 +65,9 @@
 <!-- Додаємо поточні значення для форми редагування -->
 <script th:inline="javascript">
     window.currentRule = {
-        motivationType: [[${gameRule.motivationType}]],
-        coreDrive: [[${gameRule.coreDrive}]],
-        gameElement: [[${gameRule.gameElement}]]
+        motivationType: [[${gameRule.motivationType.ukName}]],
+        coreDrive: [[${gameRule.coreDrive.ukName}]],
+        gameElement: [[${gameRule.gameElement.ukName}]]
     };
 </script>
 </body>

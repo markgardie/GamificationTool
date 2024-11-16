@@ -18,8 +18,9 @@ class GameRuleController(
 
     @GetMapping("/core-drives")
     @ResponseBody
-    fun getCoreDrives(@RequestParam motivationType: MotivationType): List<String> {
-        return gameRuleService.getAvailableCoreDrives(motivationType)
+    fun getCoreDrives(@RequestParam motivationType: String): List<String> {
+        val type = MotivationType.entries.first { it.ukName == motivationType }
+        return gameRuleService.getAvailableCoreDrives(type)
             .map { it.ukName }
     }
 
@@ -91,13 +92,15 @@ class GameRuleController(
         groupId = groupId,
         redirectAttributes = redirectAttributes,
         action = { rule ->
-            val updatedRule = gameRuleService.findById(id).copy(
+            val currentRule = gameRuleService.findById(id)
+            val updatedRule = currentRule.copy(
                 name = rule.name,
                 stimuli = rule.stimuli,
                 task = rule.task,
                 motivationType = rule.motivationType,
                 gameElement = rule.gameElement,
-                coreDrive = rule.coreDrive
+                coreDrive = rule.coreDrive,
+                group = currentRule.group
             )
             gameRuleService.updateGameRule(id, updatedRule)
         }
