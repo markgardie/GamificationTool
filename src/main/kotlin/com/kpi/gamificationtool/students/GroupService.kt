@@ -25,6 +25,7 @@ class GroupService(
                 user = user,
                 students = emptyList(),
                 gameRules = emptyList(),
+                tasks = emptyList()
             )
         )
     }
