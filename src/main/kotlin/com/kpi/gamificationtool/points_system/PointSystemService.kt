@@ -14,28 +14,6 @@ class PointSystemService(
         pointSystemRepository.saveAll(systems)
     }
 
-    fun deletePointSystem(systemId: Long) {
-        pointSystemRepository.deleteById(systemId)
-    }
-
-    fun increasePoints(studentId: Long, pointSystemName: String, amount: Int) {
-        val pointSystem = pointSystemRepository.findByStudentIdAndName(studentId, pointSystemName)
-            ?: throw IllegalArgumentException("Point system not found")
-        pointSystem.value += amount
-        pointSystemRepository.save(pointSystem)
-    }
-
-    fun decreasePoints(studentId: Long, pointSystemName: String, amount: Int) {
-        val pointSystem = pointSystemRepository.findByStudentIdAndName(studentId, pointSystemName)
-            ?: throw IllegalArgumentException("Point system not found")
-        pointSystem.value = (pointSystem.value - amount).coerceAtLeast(0)
-        pointSystemRepository.save(pointSystem)
-    }
-
-    fun getPointSystems(studentId: Long): List<PointSystem> {
-        return pointSystemRepository.findByStudentId(studentId)
-    }
-
     fun updatePoints(studentId: Long, points: Map<String, Int>) {
         val student = studentRepository.findById(studentId)
             .orElseThrow { IllegalArgumentException("Студента не знайдено") }

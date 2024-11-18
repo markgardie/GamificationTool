@@ -54,18 +54,6 @@ class StudentController(
         return "redirect:/students?groupName=$groupName"
     }
 
-    @PostMapping("/{id}/points/increase")
-    fun increasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
-        pointSystemService.increasePoints(id, name, amount)
-        return "redirect:/students/details/$id"
-    }
-
-    @PostMapping("/{id}/points/decrease")
-    fun decreasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
-        pointSystemService.decreasePoints(id, name, amount)
-        return "redirect:/students/details/$id"
-    }
-
     @GetMapping("/edit/{id}")
     fun showEditForm(@PathVariable id: Long, model: Model): String {
         val student = studentService.findById(id)
