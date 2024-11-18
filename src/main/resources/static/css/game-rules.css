@@ -223,6 +223,17 @@ select:focus {
     border-color: #007bff;
 }
 
+.add-task-form {
+    display: none; /* Форма прихована за замовчуванням */
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.add-task-form.visible {
+    display: block;
+}
 /* Responsive styles */
 @media (max-width: 600px) {
     .edit-form-container {

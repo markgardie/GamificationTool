@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Редагувати завдання</title>
+  <link rel="stylesheet" th:href="@{/css/game-rules.css}">
+</head>
+<body>
+<div class="container">
+  <h1>Редагувати завдання</h1>
+
+  <div class="edit-form-container">
+    <form th:action="@{/tasks/update/{id}(id=${task.id})}" method="post" class="edit-rule-form">
+      <input type="hidden" name="groupId" th:value="${groupId}">
+
+      <div class="form-group">
+        <label for="name">Назва завдання:</label>
+        <input type="text" id="name" name="name" th:value="${task.name}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Опис завдання:</label>
+        <input type="text" id="description" name="description" th:value="${task.description}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="competencyName">Навчальна компетентність:</label>
+        <input type="text" id="competencyName" name="competencyName"
+               th:value="${task.learningCompetency.name}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="knowledgeArea">Область знань:</label>
+        <select id="knowledgeArea" name="knowledgeArea" required>
+          <option th:each="area : ${knowledge_areas}"
+                  th:value="${area.ukName}"
+                  th:text="${area.ukName}"
+                  th:selected="${area == task.knowledgeArea}">
+          </option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a th:href="@{/tasks(groupId=${groupId})}" class="btn btn-secondary">Відмінити</a>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
