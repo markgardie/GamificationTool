@@ -12,6 +12,7 @@
 
     <div class="navigation-buttons">
         <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">До списку студентів</a>
+        <a th:href="@{/tasks(groupId=${groupId})}" class="btn btn-secondary">До списку завдань</a>
     </div>
 
     <!-- Список наявних правил -->
@@ -21,7 +22,7 @@
                 <div class="rule-name" th:text="${rule.name}"></div>
                 <div class="rule-details">
                     <span th:text="${rule.stimuli}"></span> |
-                    <span th:text="${rule.task}"></span> |
+                    <span th:text="${rule.task.name}"></span> |
                     <span th:text="${rule.motivationType.ukName}"></span> |
                     <span th:text="${rule.coreDrive.ukName}"></span> |
                     <span th:text="${rule.gameElement.ukName}"></span>
@@ -50,7 +51,14 @@
         <form th:action="@{/game-rules/add(groupId=${groupId})}" method="post" class="add-rule-form">
             <input type="text" name="name" placeholder="Назва" required>
             <input type="text" name="stimuli" placeholder="Стимул" required>
-            <input type="text" name="task" placeholder="Завдання" required>
+
+            <select name="taskId" required>
+                <option value="">Виберіть завдання</option>
+                <option th:each="task : ${tasks}"
+                        th:value="${task.id}"
+                        th:text="${task.name}">
+                </option>
+            </select>
 
             <select name="motivationType" id="motivationType" required>
                 <option value="">Виберіть тип мотивації</option>
