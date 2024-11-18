@@ -35,4 +35,16 @@ class PointSystemService(
     fun getPointSystems(studentId: Long): List<PointSystem> {
         return pointSystemRepository.findByStudentId(studentId)
     }
+
+    fun updatePoints(studentId: Long, points: Map<String, Int>) {
+        val student = studentRepository.findById(studentId)
+            .orElseThrow { IllegalArgumentException("Студента не знайдено") }
+
+        for ((name, value) in points) {
+            val pointSystem = student.pointSystems.find { it.name == name }
+                ?: continue
+
+            pointSystemRepository.save(pointSystem.copy(value = value))
+        }
+    }
 }
