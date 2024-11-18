@@ -86,12 +86,11 @@ class TaskController(
         action: (Task) -> Task
     ): String {
         val knowledgeArea = KnowledgeArea.entries.first { it.ukName == taskForm.knowledgeArea }
-        val skill = Skill(name = taskForm.skillName)
 
         val task = Task(
             name = taskForm.name,
             description = taskForm.description,
-            skill = skill,
+            skill = taskForm.skillName,  // Тепер просто передаємо String
             knowledgeArea = knowledgeArea,
             group = groupService.findById(groupId)
         )

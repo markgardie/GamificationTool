@@ -16,9 +16,8 @@ data class Task(
     @Column(nullable = false, columnDefinition = "TEXT")
     val description: String,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "competency_id", nullable = false)
-    val skill: Skill,
+    @Column(nullable = false)
+    val skill: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "knowledge_area", nullable = false)

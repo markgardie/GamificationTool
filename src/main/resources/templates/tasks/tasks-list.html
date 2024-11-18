@@ -22,7 +22,7 @@
                 <div class="rule-name" th:text="${task.name}"></div>
                 <div class="rule-details">
                     <span th:text="${task.description}"></span> |
-                    <span th:text="${task.learningCompetency.name}"></span> |
+                    <span th:text="${task.skill}"></span> |
                     <span th:text="${task.knowledgeArea.ukName}"></span>
                 </div>
             </div>
@@ -49,7 +49,7 @@
         <form th:action="@{/tasks/add(groupId=${groupId})}" method="post" class="add-task-form">
             <input type="text" name="name" placeholder="Назва завдання" required>
             <input type="text" name="description" placeholder="Опис завдання" required>
-            <input type="text" name="competencyName" placeholder="Навчальна компетентність" required>
+            <input type="text" name="skillName" placeholder="Навчальна компетентність" required>
 
             <select name="knowledgeArea" required>
                 <option value="">Виберіть область знань</option>
