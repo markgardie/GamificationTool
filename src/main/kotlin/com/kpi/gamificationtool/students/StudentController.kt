@@ -1,6 +1,7 @@
 package com.kpi.gamificationtool.students
 
 import com.kpi.gamificationtool.points_system.PointSystemService
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -53,18 +54,6 @@ class StudentController(
         return "redirect:/students?groupName=$groupName"
     }
 
-    @PostMapping("/{id}/points/increase")
-    fun increasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
-        pointSystemService.increasePoints(id, name, amount)
-        return "redirect:/students/details/$id"
-    }
-
-    @PostMapping("/{id}/points/decrease")
-    fun decreasePoints(@PathVariable id: Long, @RequestParam name: String, @RequestParam amount: Int): String {
-        pointSystemService.decreasePoints(id, name, amount)
-        return "redirect:/students/details/$id"
-    }
-
     @GetMapping("/edit/{id}")
     fun showEditForm(@PathVariable id: Long, model: Model): String {
         val student = studentService.findById(id)
@@ -77,6 +66,23 @@ class StudentController(
     @PostMapping("/edit/{id}")
     fun updateStudent(@PathVariable id: Long, @ModelAttribute studentForm: StudentForm): String {
         studentService.updateStudent(id, studentForm)
+        return "redirect:/students/details/$id"
+    }
+
+    @PostMapping("/{id}/points/update")
+    fun updatePoints(
+        @PathVariable id: Long,
+        request: HttpServletRequest
+    ): String {
+        val points = request.parameterNames.asSequence()
+            .filter { it.startsWith("value_") }
+            .associate { paramName ->
+                val pointName = paramName.removePrefix("value_")
+                val value = request.getParameter(paramName).toIntOrNull() ?: 0
+                pointName to value
+            }
+
+        pointSystemService.updatePoints(id, points)
         return "redirect:/students/details/$id"
     }
 
