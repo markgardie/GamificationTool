@@ -1,6 +1,8 @@
 package com.kpi.gamificationtool.game_rules
 
 import com.kpi.gamificationtool.students.GroupService
+import com.kpi.gamificationtool.tasks.Task
+import com.kpi.gamificationtool.tasks.TaskService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -11,7 +13,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 class GameRuleController(
     private val gameRuleService: GameRuleService,
     private val groupService: GroupService,
+    private val taskService: TaskService,
 ) {
+
+    @ModelAttribute("tasks")
+    fun tasks(@RequestParam groupId: Long): List<Task> =
+        taskService.getTasksByGroup(groupId)
 
     @ModelAttribute("motivation_types")
     fun motivationTypes(): Array<MotivationType> = MotivationType.entries.toTypedArray()
@@ -119,11 +126,12 @@ class GameRuleController(
         action: (GameRule) -> GameRule
     ): String {
         val (motivationType, coreDrive, gameElement) = gameRuleForm.toEnums()
+        val task = taskService.findById(gameRuleForm.taskId)
 
         val rule = GameRule(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
-            task = gameRuleForm.task,
+            task = task,
             motivationType = motivationType,
             coreDrive = coreDrive,
             gameElement = gameElement,
