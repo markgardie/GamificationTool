@@ -1,6 +1,7 @@
 package com.kpi.gamificationtool.game_rules
 
 import com.kpi.gamificationtool.students.Group
+import com.kpi.gamificationtool.tasks.Task
 import jakarta.persistence.*
 
 @Entity
@@ -11,7 +12,10 @@ data class GameRule(
 
     val name: String,
     val stimuli: String,
-    val task: String,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id", nullable = false)
+    val task: Task,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "game_element", nullable = false)
@@ -27,5 +31,5 @@ data class GameRule(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
-    val group: Group,
+    val group: Group
 )

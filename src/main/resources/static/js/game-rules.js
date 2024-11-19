@@ -8,6 +8,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Додаємо обробку вибору завдання
+    const taskSelect = document.querySelector('select[name="taskId"]');
+    const recommendationDiv = document.createElement('div');
+    recommendationDiv.className = 'recommendation-message';
+
+    if (taskSelect) {
+        // Додаємо div для рекомендацій після селекта завдань
+        taskSelect.parentNode.insertBefore(recommendationDiv, taskSelect.nextSibling);
+
+        taskSelect.addEventListener('change', async function() {
+            const taskId = this.value;
+            if (taskId) {
+                try {
+                    const response = await fetch(`/game-rules/recommended-drives?taskId=${taskId}`);
+                    const recommendedDrives = await response.json();
+
+                    if (recommendedDrives.length > 0) {
+                        recommendationDiv.innerHTML = `
+                            <div class="recommendation-content">
+                                <span class="recommendation-icon">💡</span>
+                                <span>Рекомендовані драйвери: ${recommendedDrives.join(', ')}</span>
+                            </div>
+                        `;
+                        recommendationDiv.style.display = 'block';
+                    } else {
+                        recommendationDiv.style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error('Помилка при завантаженні рекомендованих драйверів:', error);
+                    recommendationDiv.style.display = 'none';
+                }
+            } else {
+                recommendationDiv.style.display = 'none';
+            }
+        });
+    }
+
     // Ініціалізація селектів
     const motivationTypeSelect = document.getElementById('motivationType');
     const coreDriveSelect = document.getElementById('coreDrive');

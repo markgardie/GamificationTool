@@ -1,6 +1,8 @@
 package com.kpi.gamificationtool.game_rules
 
 import com.kpi.gamificationtool.students.GroupService
+import com.kpi.gamificationtool.tasks.Task
+import com.kpi.gamificationtool.tasks.TaskService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -11,7 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 class GameRuleController(
     private val gameRuleService: GameRuleService,
     private val groupService: GroupService,
+    private val taskService: TaskService,
+    private val coreDriveRecommendationService: CoreDriveRecommendationService,
 ) {
+
+    @ModelAttribute("tasks")
+    fun tasks(@RequestParam(required = false) groupId: Long?): List<Task> =
+        if (groupId != null) taskService.getTasksByGroup(groupId) else emptyList()
 
     @ModelAttribute("motivation_types")
     fun motivationTypes(): Array<MotivationType> = MotivationType.entries.toTypedArray()
@@ -21,6 +29,14 @@ class GameRuleController(
     fun getCoreDrives(@RequestParam motivationType: String): List<String> {
         val type = MotivationType.entries.first { it.ukName == motivationType }
         return gameRuleService.getAvailableCoreDrives(type)
+            .map { it.ukName }
+    }
+
+    @GetMapping("/recommended-drives")
+    @ResponseBody
+    fun getRecommendedDrives(@RequestParam taskId: Long): List<String> {
+        val task = taskService.findById(taskId)
+        return coreDriveRecommendationService.getRecommendedDrives(task.knowledgeArea)
             .map { it.ukName }
     }
 
@@ -119,11 +135,12 @@ class GameRuleController(
         action: (GameRule) -> GameRule
     ): String {
         val (motivationType, coreDrive, gameElement) = gameRuleForm.toEnums()
+        val task = taskService.findById(gameRuleForm.taskId)
 
         val rule = GameRule(
             name = gameRuleForm.name,
             stimuli = gameRuleForm.stimuli,
-            task = gameRuleForm.task,
+            task = task,
             motivationType = motivationType,
             coreDrive = coreDrive,
             gameElement = gameElement,

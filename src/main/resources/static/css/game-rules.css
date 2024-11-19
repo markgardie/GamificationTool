@@ -149,6 +149,27 @@ h1 {
     border-radius: 4px;
 }
 
+.recommendation-message {
+    display: none;
+    margin: 10px 0;
+}
+
+.recommendation-content {
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.recommendation-icon {
+    font-size: 18px;
+}
+
 /* Empty list message */
 .empty-list {
     text-align: center;
@@ -223,6 +244,17 @@ select:focus {
     border-color: #007bff;
 }
 
+.add-task-form {
+    display: none; /* Форма прихована за замовчуванням */
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.add-task-form.visible {
+    display: block;
+}
 /* Responsive styles */
 @media (max-width: 600px) {
     .edit-form-container {
