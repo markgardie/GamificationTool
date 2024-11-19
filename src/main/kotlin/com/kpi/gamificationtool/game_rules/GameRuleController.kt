@@ -17,8 +17,8 @@ class GameRuleController(
 ) {
 
     @ModelAttribute("tasks")
-    fun tasks(@RequestParam groupId: Long): List<Task> =
-        taskService.getTasksByGroup(groupId)
+    fun tasks(@RequestParam(required = false) groupId: Long?): List<Task> =
+        if (groupId != null) taskService.getTasksByGroup(groupId) else emptyList()
 
     @ModelAttribute("motivation_types")
     fun motivationTypes(): Array<MotivationType> = MotivationType.entries.toTypedArray()
