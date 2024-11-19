@@ -14,6 +14,7 @@ class GameRuleController(
     private val gameRuleService: GameRuleService,
     private val groupService: GroupService,
     private val taskService: TaskService,
+    private val coreDriveRecommendationService: CoreDriveRecommendationService,
 ) {
 
     @ModelAttribute("tasks")
@@ -28,6 +29,14 @@ class GameRuleController(
     fun getCoreDrives(@RequestParam motivationType: String): List<String> {
         val type = MotivationType.entries.first { it.ukName == motivationType }
         return gameRuleService.getAvailableCoreDrives(type)
+            .map { it.ukName }
+    }
+
+    @GetMapping("/recommended-drives")
+    @ResponseBody
+    fun getRecommendedDrives(@RequestParam taskId: Long): List<String> {
+        val task = taskService.findById(taskId)
+        return coreDriveRecommendationService.getRecommendedDrives(task.knowledgeArea)
             .map { it.ukName }
     }
 
