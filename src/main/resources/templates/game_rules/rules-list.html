@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ігрові правила</title>
+    <link rel="stylesheet" th:href="@{/css/game-rules.css}">
+    <script th:src="@{/js/game-rules.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Ігрові правила для групи: <span th:text="${groupName}"></span></h1>
+
+    <div class="navigation-buttons">
+        <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">До списку студентів</a>
+        <a th:href="@{/tasks(groupId=${groupId})}" class="btn btn-secondary">До списку завдань</a>
+    </div>
+
+    <!-- Список наявних правил -->
+    <div class="rules-list">
+        <div class="rule-card" th:each="rule : ${gameRules}">
+            <div class="rule-content">
+                <div class="rule-name" th:text="${rule.name}"></div>
+                <div class="rule-details">
+                    <span th:text="${rule.stimuli}"></span> |
+                    <span th:text="${rule.task.name}"></span> |
+                    <span th:text="${rule.motivationType.ukName}"></span> |
+                    <span th:text="${rule.coreDrive.ukName}"></span> |
+                    <span th:text="${rule.gameElement.ukName}"></span>
+                </div>
+            </div>
+            <div class="rule-actions">
+                <form th:action="@{/game-rules/delete/{id}(id=${rule.id})}" method="post">
+                    <input type="hidden" name="groupId" th:value="${groupId}">
+                    <button type="submit" class="btn btn-danger">×</button>
+                </form>
+                <a th:href="@{/game-rules/edit/{id}(id=${rule.id}, groupId=${groupId})}" class="btn btn-warning">
+                    Змінити
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Перевіряємо, чи список правил пустий -->
+    <div th:if="${#lists.isEmpty(gameRules)}" class="empty-list">
+        <p>Ігрові правила відсутні</p>
+    </div>
+
+    <!-- Форма додавання нового правила -->
+    <div class="add-rule-section">
+        <button class="btn btn-success add-rule-btn">Додати правило</button>
+        <form th:action="@{/game-rules/add(groupId=${groupId})}" method="post" class="add-rule-form">
+            <input type="text" name="name" placeholder="Назва" required>
+            <input type="text" name="stimuli" placeholder="Стимул" required>
+
+            <select name="taskId" required>
+                <option value="">Виберіть завдання</option>
+                <option th:each="task : ${tasks}"
+                        th:value="${task.id}"
+                        th:text="${task.name}">
+                </option>
+            </select>
+
+            <select name="motivationType" id="motivationType" required>
+                <option value="">Виберіть тип мотивації</option>
+                <option th:each="type : ${motivation_types}"
+                        th:value="${type.ukName}"
+                        th:text="${type.ukName}">
+                </option>
+            </select>
+
+            <select name="coreDrive" id="coreDrive" required disabled>
+                <option value="">Спочатку виберіть тип мотивації</option>
+            </select>
+
+            <select name="gameElement" id="gameElement" required disabled>
+                <option value="">Спочатку виберіть драйвер</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Зберегти</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

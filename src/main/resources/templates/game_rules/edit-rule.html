@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати правило</title>
+    <link rel="stylesheet" th:href="@{/css/game-rules.css}">
+    <script th:src="@{/js/game-rules.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Редагувати правило</h1>
+
+    <div class="edit-form-container">
+        <form th:action="@{/game-rules/update/{id}(id=${gameRule.id})}" method="post" class="edit-rule-form">
+            <input type="hidden" name="groupId" th:value="${groupId}">
+
+            <div class="form-group">
+                <label for="name">Назва:</label>
+                <input type="text" id="name" name="name" th:value="${gameRule.name}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stimuli">Стимул:</label>
+                <input type="text" id="stimuli" name="stimuli" th:value="${gameRule.stimuli}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="taskId">Завдання:</label>
+                <select id="taskId" name="taskId" required>
+                    <option th:each="task : ${tasks}"
+                            th:value="${task.id}"
+                            th:text="${task.name}"
+                            th:selected="${task.id == gameRule.task.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="motivationType">Тип мотивації:</label>
+                <select id="motivationType" name="motivationType" required>
+                    <option th:each="type : ${motivation_types}"
+                            th:value="${type.ukName}"
+                            th:text="${type.ukName}"
+                            th:selected="${type == gameRule.motivationType}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="coreDrive">Драйвер:</label>
+                <select id="coreDrive" name="coreDrive" required>
+                    <option value="">Виберіть драйвер</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gameElement">Ігровий елемент:</label>
+                <select id="gameElement" name="gameElement" required>
+                    <option value="">Виберіть ігровий елемент</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-secondary">Відмінити</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Додаємо поточні значення для форми редагування -->
+<script th:inline="javascript">
+    window.currentRule = {
+        motivationType: [[${gameRule.motivationType.ukName}]],
+        coreDrive: [[${gameRule.coreDrive.ukName}]],
+        gameElement: [[${gameRule.gameElement.ukName}]]
+    };
+</script>
+</body>
+</html>

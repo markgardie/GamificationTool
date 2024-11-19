@@ -14,24 +14,24 @@
         <p><strong>Група:</strong> <span th:text="${student.group.name}">Назва групи</span></p>
         <p><strong>Вік:</strong> <span th:text="${student.age}">Вік</span> років</p>
 
-        <h3>Бали</h3>
-        <div th:if="${not #lists.isEmpty(student.pointSystems)}" class="points-list">
-            <div th:each="point : ${student.pointSystems}" class="point-item">
-                <span class="point-name" th:text="${point.name}">Назва шкали</span>
-                <span class="point-value" th:text="${point.value}">Кількість балів</span>
-                <form th:action="@{/students/{id}/points/increase(id=${student.id})}" method="post" style="display: inline;">
-                    <input type="hidden" name="name" th:value="${point.name}" />
-                    <input type="hidden" name="amount" value="1" />
-                    <button type="submit" class="btn btn-success">+</button>
-                </form>
-                <form th:action="@{/students/{id}/points/decrease(id=${student.id})}" method="post" style="display: inline;">
-                    <input type="hidden" name="name" th:value="${point.name}" />
-                    <input type="hidden" name="amount" value="1" />
-                    <button type="submit" class="btn btn-warning">-</button>
-                </form>
-            </div>
+        <div class="points-container">
+            <h3>Бали</h3>
+            <form th:action="@{/students/{id}/points/update(id=${student.id})}" method="post">
+                <div th:if="${not #lists.isEmpty(student.pointSystems)}" class="points-list">
+                    <div th:each="point : ${student.pointSystems}" class="point-item">
+                        <span class="point-name" th:text="${point.name}">Назва шкали</span>
+                        <input type="number"
+                               th:name="'value_' + ${point.name}"
+                               th:value="${point.value}"
+                               class="point-input"
+                               min="0">
+                    </div>
+                </div>
+                <p th:if="${#lists.isEmpty(student.pointSystems)}" class="empty-list">У цього студента немає балів</p>
+
+                <button type="submit" class="update-btn">Оновити бали</button>
+            </form>
         </div>
-        <p th:if="${#lists.isEmpty(student.pointSystems)}" class="empty-list">У цього студента немає балів</p>
 
         <div class="actions">
             <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">Редагувати</a>

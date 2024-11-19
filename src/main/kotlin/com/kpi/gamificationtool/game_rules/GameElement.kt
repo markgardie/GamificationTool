@@ -1,0 +1,72 @@
+package com.kpi.gamificationtool.game_rules
+
+enum class GameElement(val ukName: String, val description: String) {
+    NARRATIVE("Історія", ""),
+    REAL_PROJECTS("Реальні проекти", ""),
+    CHARITY_PROJECTS("Благодійні проекти", ""),
+    MENTORSHIP("Менторство", ""),
+    CRISIS_SIMULATION("Симуляція криз", ""),
+
+    DEVELOPER_LEVELS("Рівні розробника", ""),
+    SKILL_TREE("Дерево навичок", ""),
+    BADGES("Значки досягнень", ""),
+    PERSONAL_STATISTIC("Особиста статистика", ""),
+    QUIZ("Вікторини", ""),
+    TECHNICAL_DEMO("Технічні демонстрації", ""),
+    PORTFOLIO("Портфоліо проектів", ""),
+    CERTIFICATE("Сертифікати", ""),
+    CHALLENGE("Випробування", ""),
+    PROGRESS_BAR("Прогрес-бар", ""),
+    BURNDOWN_DIAGRAM("Діаграма згорання", ""),
+    KANBAN_BOARD("Дошка Канбан", ""),
+    LEADERBOARD("Таблиця лідерів", ""),
+
+
+    OWN_PROJECTS("Вибір теми проекту", ""),
+    OWN_SOLUTIONS("Вибір рішення", ""),
+    RESEARCH("Дослідницьке завдання", ""),
+    CUSTOMIZATION("Кастомізація", ""),
+    NONLINEAR_STORY("Розгалужений сюжет", ""),
+    INNOVATION_HACKATHON("Хакатони інновацій", ""),
+    IDEAS_FORUM("Форум ідей", ""),
+    BRAINSTORM("Мозговий штурм", ""),
+    SIX_HATS("Шість капелюхів", ""),
+    FOUR_STEP_SKETCH("Чотири кроки", ""),
+    DOT_VOTING("Голосування крапками", ""),
+    CRAZY_EIGHTS("Божевільні вісімки", ""),
+
+    CURRENCY("Віртуальна валюта", ""),
+    STORE("Магазин нагород", ""),
+    COLLECTION_SET("Колекціонування", ""),
+    VIRTUAL_ECONOMICS("Віртуальна економіка", ""),
+
+    ROLE_PLAY("Рольові ігри", ""),
+    TEAM_PROJECTS("Командні проекти", ""),
+    TEAM_HACKATHONS("Командні хакатони", ""),
+    SOCIAL_NETWORK("Соціальні мережі", ""),
+
+    LIMITED_COURSES("Курс з обмеженими місцями", ""),
+    DEADLINES("Терміни виконання", ""),
+    LIMITED_RESOURCES("Обмежені ресурси", ""),
+    FUNCTIONALITY_PRIORITIZATION("Пріоритезація функціональності", ""),
+    REQUIREMENTS_PRIORITIZATION("Пріоритезація вимог", ""),
+    TIME_LIMITED_INTERVIEWS("Обмежені часом інтерв'ю", ""),
+    TIME_LIMITED_HACKATHONS("Обмежені часом хакатони", ""),
+    POKER_PLANNING("Покер планування", ""),
+
+    CHANGING_REQUIREMENTS("Мінливі вимоги", ""),
+    RANDOM_TEAMS("Випадковий склад команди", ""),
+    RANDOM_BUGS("Випадкові баги", ""),
+    UNPREDICTABLE_STORY("Непередбачуваний сюжет", ""),
+    EASTER_EGGS("Пасхалки", ""),
+    STORY_POINT_ESTIMATION("Оцінювання задач", ""),
+    RANDOM_TECHNOLOGIES("Випадкові технології", ""),
+
+    NEGATIVE_ENDING("Негативна кінцівка", ""),
+    STARTUP_FAILURE("Провал стартапу", ""),
+    CYBERATTACK("Симуляція кібератак", ""),
+    PROJECTS_ATTACK_COMPETITION("Атака проектів", ""),
+    PENALTY_POINTS("Штрафні бали", ""),
+    LOSING_STREAK("Втрата стріку", ""),
+
+}

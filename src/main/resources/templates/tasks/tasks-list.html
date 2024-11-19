@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Навчальні завдання</title>
+    <link rel="stylesheet" th:href="@{/css/game-rules.css}">
+    <script th:src="@{/js/tasks.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Навчальні завдання для групи: <span th:text="${groupName}"></span></h1>
+
+    <div class="navigation-buttons">
+        <a th:href="@{/students(groupName=${groupName})}" class="btn btn-secondary">До списку студентів</a>
+        <a th:href="@{/game-rules(groupId=${groupId})}" class="btn btn-secondary">До списку правил</a>
+    </div>
+
+    <!-- Список наявних завдань -->
+    <div class="rules-list">
+        <div class="rule-card" th:each="task : ${tasks}">
+            <div class="rule-content">
+                <div class="rule-name" th:text="${task.name}"></div>
+                <div class="rule-details">
+                    <span th:text="${task.description}"></span> |
+                    <span th:text="${task.skill}"></span> |
+                    <span th:text="${task.knowledgeArea.ukName}"></span>
+                </div>
+            </div>
+            <div class="rule-actions">
+                <form th:action="@{/tasks/delete/{id}(id=${task.id})}" method="post">
+                    <input type="hidden" name="groupId" th:value="${groupId}">
+                    <button type="submit" class="btn btn-danger">×</button>
+                </form>
+                <a th:href="@{/tasks/edit/{id}(id=${task.id}, groupId=${groupId})}" class="btn btn-warning">
+                    Змінити
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Перевіряємо, чи список завдань пустий -->
+    <div th:if="${#lists.isEmpty(tasks)}" class="empty-list">
+        <p>Навчальні завдання відсутні</p>
+    </div>
+
+    <!-- Форма додавання нового завдання -->
+    <div class="add-rule-section">
+        <button class="btn btn-success add-task-btn">Додати завдання</button>
+        <form th:action="@{/tasks/add(groupId=${groupId})}" method="post" class="add-task-form">
+            <input type="text" name="name" placeholder="Назва завдання" required>
+            <input type="text" name="description" placeholder="Опис завдання" required>
+            <input type="text" name="skillName" placeholder="Навчальна компетентність" required>
+
+            <select name="knowledgeArea" required>
+                <option value="">Виберіть область знань</option>
+                <option th:each="area : ${knowledge_areas}"
+                        th:value="${area.ukName}"
+                        th:text="${area.ukName}">
+                </option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Зберегти</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
