@@ -41,7 +41,7 @@ class StudentService(
         val savedStudent = studentRepository.save(student)
 
         val testPointSystems = listOf(
-            PointSystem(name = "Логіки", value = 0, student = savedStudent),
+            PointSystem(name = "Валюта", value = 0, student = savedStudent),
             PointSystem(name = "Технічні навички", value = 0, student = savedStudent),
             PointSystem(name = "Креативність", value = 0, student = savedStudent),
             PointSystem(name = "Командна робота", value = 0, student = savedStudent),

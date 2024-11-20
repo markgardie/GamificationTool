@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Controller
 @RequestMapping(path = ["/students"])
@@ -45,13 +47,15 @@ class StudentController(
     @PostMapping("/add")
     fun addStudent(@ModelAttribute studentForm: StudentForm): String {
         val newStudent = studentService.saveStudent(studentForm)
-        return "redirect:/students?groupName=${newStudent.group.name}"
+        val encodedGroupName = URLEncoder.encode(newStudent.group.name, StandardCharsets.UTF_8.toString())
+        return "redirect:/students?groupName=$encodedGroupName"
     }
 
     @PostMapping("/delete")
     fun deleteStudent(@RequestParam studentId: Long, @RequestParam groupName: String): String {
         studentService.deleteStudentById(studentId)
-        return "redirect:/students?groupName=$groupName"
+        val encodedGroupName = URLEncoder.encode(groupName, StandardCharsets.UTF_8.toString())
+        return "redirect:/students?groupName=$encodedGroupName"
     }
 
     @GetMapping("/edit/{id}")
