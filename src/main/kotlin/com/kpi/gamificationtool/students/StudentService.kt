@@ -31,7 +31,7 @@ class StudentService(
 
         val student = Student(
             name = studentForm.name,
-            age = studentForm.age,
+            birthDate = studentForm.birthDate,
             login = studentForm.login,
             password = passwordEncoder.encode(studentForm.password),
             group = group,
@@ -66,7 +66,7 @@ class StudentService(
         }
         return studentRepository.save(student.copy(
             name = studentForm.name,
-            age = studentForm.age,
+            birthDate = studentForm.birthDate,
             login = studentForm.login,
             password = newPassword,
             group = newGroup,

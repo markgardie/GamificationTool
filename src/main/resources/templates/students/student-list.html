@@ -23,7 +23,7 @@
             <li th:each="student : ${students}" class="list-item">
                 <a th:href="@{/students/details/{id}(id=${student.id})}" class="student-link">
                     <span class="item-name" th:text="${student.name}">Ім'я студента</span>
-                    <span class="student-age" th:text="${student.age + ' років'}">Вік</span>
+                    <span class="student-age" th:text="${student.calculateAge() + ' років'}">Вік</span>
                 </a>
                 <form th:action="@{/students/delete}" method="post" style="display: inline;">
                     <input type="hidden" name="studentId" th:value="${student.id}" />

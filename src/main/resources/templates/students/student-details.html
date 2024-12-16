@@ -12,7 +12,7 @@
     <div class="student-details">
         <h2 th:text="${student.name}">Ім'я студента</h2>
         <p><strong>Група:</strong> <span th:text="${student.group.name}">Назва групи</span></p>
-        <p><strong>Вік:</strong> <span th:text="${student.age}">Вік</span> років</p>
+        <p><strong>Вік:</strong> <span th:text="${student.calculateAge()}">Вік</span> років</p>
 
         <div class="points-container">
             <h3>Бали</h3>
