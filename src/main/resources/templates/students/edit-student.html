@@ -15,8 +15,9 @@
             <input type="text" id="name" name="name" th:value="${student.name}" required>
         </div>
         <div class="form-group">
-            <label for="age">Вік:</label>
-            <input type="number" id="age" name="age" th:value="${student.age}" required min="0">
+            <label for="birthDate">Дата народження:</label>
+            <input type="date" id="birthDate" name="birthDate"
+                   th:value="${#temporals.format(student.birthDate, 'yyyy-MM-dd')}" required>
         </div>
         <div class="form-group">
             <label for="login">Логін:</label>
